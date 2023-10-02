@@ -15,31 +15,46 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 
-print('Welcome to the Pazuzu Pizza App\n')
 
 def display_pizzas():
+    """
+    Display the list of pre-made pizzas available
+    """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
-    for pizza in menu_list[1:]:
-        print(*pizza)
+    for i, pizza in enumerate(menu_list[1:]):
+        pizza_str = ', '.join(pizza)
+        print(f'{i + 1}: {pizza_str}')
     print('\n')    
     option_select()
 
+
 def option_select():
-    print('Please select a function')
+    """
+    Select which function to use
+    """
+    print('Please select an option...')
     print('> 1: Display Pizza Menu')
     print('> 2: Input Sales')
+    print('> 3: Input Disposals')
+    print('> 6: Exit\n')
 
-    user_selection = input('Function #: ')
+    user_selection = input('Input Option Number: ')
     if user_selection == "1":
-        print('Display Pizza Menu selected\n')
+        print('\nDisplaying Pizza Menu...\n')
         display_pizzas()
     elif user_selection == "2":
-        print('2 selected, good')
+        print('2 selected, good\n')
         option_select()
+    elif user_selection == "6":
+        print('exit\n')    
     else:
         print('Please select valid option')
+        print('Only the option number is required')
         option_select() 
+
+
+print('Welcome to the Pazuzu Pizza App\n')
 
 option_select()
 
