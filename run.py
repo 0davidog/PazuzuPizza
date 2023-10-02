@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import gspread
 from google.oauth2.service_account import Credentials
+from datetime import datetime
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -29,8 +30,39 @@ def display_pizzas():
     option_select()
 
 
-def option_select():
+def input_sales():
     """
+    Function to input sales figures.
+    """
+    print(f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    day = datetime.now().strftime("%a")
+    
+    pizza_sales = SHEET.worksheet('pizza_sales')
+    pizza_list = pizza_sales.col_values(1) 
+    
+    for i, pizza in enumerate(pizza_list[1:]):
+        sold = input(f"Enter sales for {pizza}:")
+        if day == "Mon":
+            col = "B"
+        elif day == "Tue":
+            col = "C"
+        elif day == "Wed":
+            col = "D"
+        elif day == "Thu":
+            col = "E"
+        elif day == "Fri":
+            col = "F"
+        elif day == "Sat":
+            col = "G"
+        elif day == "sun":
+            col = "H"    
+        pizza_sales.update(f"{col}{i + 2}", f"{sold}")
+        
+
+
+
+def option_select():
+    """"
     Select which function to use
     """
     print('Please select an option...')
@@ -44,8 +76,8 @@ def option_select():
         print('\nDisplaying Pizza Menu...\n')
         display_pizzas()
     elif user_selection == "2":
-        print('2 selected, good\n')
-        option_select()
+        print('\nRecording sales...\n')
+        input_sales()
     elif user_selection == "6":
         print('exit\n')    
     else:
