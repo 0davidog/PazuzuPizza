@@ -19,15 +19,36 @@ SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 
 def display_pizzas():
     """
-    Display the list of pre-made pizzas available
+    Display the list of pre-made pizzas available.
+    List is numbered and displayed without square brackets.
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
     for i, pizza in enumerate(menu_list[1:]):
         pizza_str = ', '.join(pizza)
         print(f'{i + 1}: {pizza_str}')
-    print('\n')    
+    print('\n')
     option_select()
+
+def convert_day():
+    """
+    Function takes todays day and converts it into a colum reference.
+    """
+    day = datetime.now().strftime("%a")
+    if day == "Mon":
+        return "B"
+    elif day == "Tue":
+        return "C"
+    elif day == "Wed":
+        return "D"
+    elif day == "Thu":
+        return "E"
+    elif day == "Fri":
+        return "F"
+    elif day == "Sat":
+        return "G"
+    elif day == "sun":
+        return "H"  
 
 
 def input_sales():
@@ -35,28 +56,14 @@ def input_sales():
     Function to input sales figures.
     """
     print(f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
-    day = datetime.now().strftime("%a")
     
     pizza_sales = SHEET.worksheet('pizza_sales')
-    pizza_list = pizza_sales.col_values(1) 
+    pizza_list = pizza_sales.col_values(1)
     
     for i, pizza in enumerate(pizza_list[1:]):
-        sold = input(f"Enter sales for {pizza}:")
-        if day == "Mon":
-            col = "B"
-        elif day == "Tue":
-            col = "C"
-        elif day == "Wed":
-            col = "D"
-        elif day == "Thu":
-            col = "E"
-        elif day == "Fri":
-            col = "F"
-        elif day == "Sat":
-            col = "G"
-        elif day == "sun":
-            col = "H"    
-        pizza_sales.update(f"{col}{i + 2}", f"{sold}")
+        sold = input(f"Enter sales for {pizza}: ")
+  
+        pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}")
         
 
 
@@ -89,4 +96,3 @@ def option_select():
 print('Welcome to the Pazuzu Pizza App\n')
 
 option_select()
-
