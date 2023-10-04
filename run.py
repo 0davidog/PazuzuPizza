@@ -65,12 +65,59 @@ def input_sales():
             try:
                 sold = int(input(f"Enter sales for {pizza}: "))
                 pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}", value_input_option='USER_ENTERED')
-                break;
+                break
             except ValueError:
                 print('Please enter a whole number')
         
 
+def input_waste():
+    """
+    Function to record wasteage
+    """
+    print(f'Disposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
 
+    pizza_waste = SHEET.worksheet('pizza_disposals')
+    disposal_list = pizza_waste.col_values(1)
+    ingredient_disposal = disposal_list[1:16]
+    pizza_disposal = disposal_list[16:30]
+
+    print('Please select an option...')
+    print('> 1: Ingredients Disposal')
+    print('> 2: Pizza Disposal')
+    print('> 3: Exit\n')
+
+    user_waste_selection = input('Input Option Number: ')
+    if user_waste_selection == "1":
+        print('\nRecording pizza ingredient disposals...\n')
+        for i, ingredient in enumerate(ingredient_disposal):
+            while True:
+                try:
+                    disposal = int(input(f"Enter disposal number for {ingredient}: "))
+                    pizza_waste.update(f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED')
+                    break
+                except ValueError:
+                    print('Please enter a whole number')
+        print('\n')            
+        input_waste()            
+    elif user_waste_selection == "2":
+        print('\nRecording pre-made pizza disposals...\n')
+        for i, pizza in enumerate(pizza_disposal):
+            while True:
+                try:
+                    disposal = int(input(f"Enter disposal number for {pizza}: "))
+                    pizza_waste.update(f"B{i + 17}", f"{disposal}", value_input_option='USER_ENTERED')
+                    break
+                except ValueError:
+                    print('Please enter a whole number')
+        print('\n')            
+        input_waste()            
+    elif user_waste_selection == "3":
+        option_select()
+    else:
+        print('Please select valid option')
+        print('Only the option number is required')
+        input_waste()
+    
 
 def option_select():
     """"
@@ -90,6 +137,9 @@ def option_select():
         print('\nRecording sales...\n')
         input_sales()
         option_select()
+    elif user_selection == "3":
+        print('\nRecording waste...\n')
+        input_waste()    
     elif user_selection == "6":
         print('exit\n')    
     else:
@@ -98,6 +148,6 @@ def option_select():
         option_select() 
 
 
-print('Welcome to the Pazuzu Pizza App\n')
+print('\nWelcome to the Pazuzu Pizza App\n')
 
 option_select()
