@@ -28,7 +28,7 @@ def display_pizzas():
         pizza_str = ', '.join(pizza)
         print(f'{i + 1}: {pizza_str}')
     print('\n')
-    option_select()
+    start_program()
 
 def convert_day():
     """
@@ -112,21 +112,27 @@ def input_waste():
         print('\n')            
         input_waste()            
     elif user_waste_selection == "3":
-        option_select()
+        start_program()
     else:
         print('Please select valid option')
         print('Only the option number is required')
         input_waste()
 
 
-def update_production_plan():
+def calculate_production_plan():
     """
-    Function to update production plan
+    Function to calculate and update production plan
     """
+    pizza_sales = SHEET.worksheet('pizza_sales')
     pizza_production = SHEET.worksheet('pizza_production')
-    pizza_list = pizza_production.col_values(1)
+
+    pizza_list = pizza_sales.col_values(1)
+
     for i, pizza in enumerate(pizza_list[1:]):
-        pizza_production.update(f'{convert_day()}{i + 2}', "?")
+        sale = int(pizza_sales.acell(f"{convert_day()}{i + 2}").value)
+        target = sale * 1.1
+        pizza_production.update(f'{convert_day()}{i + 2}', f"{round(target)}")
+    
 
 def display_producion_plan():
     """
@@ -139,7 +145,7 @@ def display_producion_plan():
     for i, pizza in enumerate(pizza_list[1:]):
         print(f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}')
 
-    option_select()
+    start_program()
     
 
 def option_select():
@@ -160,7 +166,7 @@ def option_select():
     elif user_selection == "2":
         print('\nRecording sales...\n')
         input_sales()
-        option_select()
+        start_program()
     elif user_selection == "3":
         print('\nRecording waste...\n')
         input_waste()
@@ -172,9 +178,17 @@ def option_select():
     else:
         print('Please select valid option')
         print('Only the option number is required')
-        option_select() 
+        start_program() 
 
+
+def start_program():
+    """
+    Activate Functions
+    """
+    calculate_production_plan()
+    option_select()
 
 print('\nWelcome to the Pazuzu Pizza App\n')
-update_production_plan()
-option_select()
+
+start_program()
+
