@@ -117,6 +117,19 @@ def input_waste():
         print('Please select valid option')
         print('Only the option number is required')
         input_waste()
+
+
+def display_producion_plan():
+    """
+    Function to view todays production plan
+    """
+    pizza_production = SHEET.worksheet('pizza_production')
+    pizza_list = pizza_production.col_values(1)
+    print(f'Production plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    
+    for i, pizza in enumerate(pizza_list[1:]):
+        print(f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}')
+
     
 
 def option_select():
@@ -127,6 +140,7 @@ def option_select():
     print('> 1: Display Pizza Menu')
     print('> 2: Input Sales')
     print('> 3: Input Disposals')
+    print('> 4: View Production Plan')
     print('> 6: Exit\n')
 
     user_selection = input('Input Option Number: ')
@@ -139,7 +153,10 @@ def option_select():
         option_select()
     elif user_selection == "3":
         print('\nRecording waste...\n')
-        input_waste()    
+        input_waste()
+    elif user_selection == "4":
+        print('\nDisplaying Production Plan...\n')
+        display_producion_plan()
     elif user_selection == "6":
         print('exit\n')    
     else:
