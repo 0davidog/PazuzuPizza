@@ -119,6 +119,15 @@ def input_waste():
         input_waste()
 
 
+def update_production_plan():
+    """
+    Function to update production plan
+    """
+    pizza_production = SHEET.worksheet('pizza_production')
+    pizza_list = pizza_production.col_values(1)
+    for i, pizza in enumerate(pizza_list[1:]):
+        pizza_production.update(f'{convert_day()}{i + 2}', "?")
+
 def display_producion_plan():
     """
     Function to view todays production plan
@@ -130,6 +139,7 @@ def display_producion_plan():
     for i, pizza in enumerate(pizza_list[1:]):
         print(f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}')
 
+    option_select()
     
 
 def option_select():
@@ -166,5 +176,5 @@ def option_select():
 
 
 print('\nWelcome to the Pazuzu Pizza App\n')
-
+update_production_plan()
 option_select()
