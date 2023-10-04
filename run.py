@@ -32,7 +32,7 @@ def display_pizzas():
 
 def convert_day():
     """
-    Function takes todays day and converts it into a colum reference.
+    Function takes todays day and converts it into a column reference.
     """
     day = datetime.now().strftime("%a")
     if day == "Mon":
@@ -61,9 +61,13 @@ def input_sales():
     pizza_list = pizza_sales.col_values(1)
     
     for i, pizza in enumerate(pizza_list[1:]):
-        sold = input(f"Enter sales for {pizza}: ")
-  
-        pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}")
+        while True:
+            try:
+                sold = int(input(f"Enter sales for {pizza}: "))
+                pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}")
+                break;
+            except ValueError:
+                print('Please enter a whole number')
         
 
 
@@ -85,6 +89,7 @@ def option_select():
     elif user_selection == "2":
         print('\nRecording sales...\n')
         input_sales()
+        option_select()
     elif user_selection == "6":
         print('exit\n')    
     else:
