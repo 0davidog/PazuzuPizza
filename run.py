@@ -64,7 +64,7 @@ def input_sales():
         while True:
             try:
                 sold = int(input(f"Enter sales for {pizza}: "))
-                pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}")
+                pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}", value_input_option='USER_ENTERED')
                 break;
             except ValueError:
                 print('Please enter a whole number')
