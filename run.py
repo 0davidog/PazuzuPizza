@@ -68,6 +68,10 @@ def input_sales():
                 break
             except ValueError:
                 print('Please enter a whole number')
+    print('\nThank you. Updating production plan for next week.\n')
+    calculate_production_plan()
+    print('Production plan updated succesfully.')
+    start_program()            
         
 
 def input_waste():
@@ -121,7 +125,9 @@ def input_waste():
 
 def calculate_production_plan():
     """
-    Function to calculate and update production plan
+    Function to calculate and update production plan.
+    Takes the value of todays pizza sales and adds 10%.
+    Updates number of pizzas to be made for same day.
     """
     pizza_sales = SHEET.worksheet('pizza_sales')
     pizza_production = SHEET.worksheet('pizza_production')
@@ -131,7 +137,7 @@ def calculate_production_plan():
     for i, pizza in enumerate(pizza_list[1:]):
         sale = int(pizza_sales.acell(f"{convert_day()}{i + 2}").value)
         target = sale * 1.1
-        pizza_production.update(f'{convert_day()}{i + 2}', f"{round(target)}")
+        pizza_production.update(f'{convert_day()}{i + 2}', f"{round(target)}", value_input_option='USER_ENTERED')
     
 
 def display_producion_plan():
@@ -185,7 +191,6 @@ def start_program():
     """
     Activate Functions
     """
-    calculate_production_plan()
     option_select()
 
 print('\nWelcome to the Pazuzu Pizza App\n')
