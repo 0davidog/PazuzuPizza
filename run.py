@@ -1,10 +1,13 @@
 # Your code goes here.
 # You can delete these comments, but do not change the name of this file
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
+
+# Module imports
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
+# Code to access gspread and google drive from love-sandwiches walkthough project
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -20,7 +23,9 @@ SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 def display_pizzas():
     """
     Display the list of pre-made pizzas available.
-    List is numbered and displayed without square brackets.
+    List is pulled from google sheets, ignoring first cell in column.
+    List is then numbered and displayed without square brackets.
+    Start_program funnction is then called to return user to menu.
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
@@ -28,11 +33,14 @@ def display_pizzas():
         pizza_str = ', '.join(pizza)
         print(f'{i + 1}: {pizza_str}')
     print('\n')
+    start_program()
 
 
 def convert_day():
     """
-    Function takes todays day and converts it into a column reference.
+    Function imports todays day from python's datetime module.
+    Then converts it into a letter for use as column reference.
+    This function will be called within other functions.
     """
     day = datetime.now().strftime("%a")
     if day == "Mon":
@@ -54,6 +62,8 @@ def convert_day():
 def input_sales():
     """
     Function to input sales figures.
+    Imports pizza_sales worksheet from google sheets.
+    For each product listed the user is asked to input sales figure.
     """
     print(f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
     
@@ -63,14 +73,17 @@ def input_sales():
     for i, pizza in enumerate(pizza_list[1:]):
         while True:
             try:
-                sold = int(input(f"Enter sales for {pizza}: "))
-                pizza_sales.update(f"{convert_day()}{i + 2}", f"{sold}", value_input_option='USER_ENTERED')
+                sold = int(input(f"Enter sales for {pizza}: \n"))
+                pizza_sales.update(
+                    f"{convert_day()}{i + 2}", f"{sold}", value_input_option='USER_ENTERED'
+                    )
                 break
             except ValueError:
                 print('Please enter a whole number')
     print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
-    print('Production plan updated succesfully.\n')           
+    print('Production plan updated succesfully.\n')
+    start_program()        
 
 
 def input_waste():
@@ -96,7 +109,9 @@ def input_waste():
             while True:
                 try:
                     disposal = int(input(f"Enter disposal number for {ingredient}: "))
-                    pizza_waste.update(f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED')
+                    pizza_waste.update(
+                        f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
+                        )
                     break
                 except ValueError:
                     print('Please enter a whole number')
@@ -108,7 +123,9 @@ def input_waste():
             while True:
                 try:
                     disposal = int(input(f"Enter disposal number for {pizza}: "))
-                    pizza_waste.update(f"B{i + 17}", f"{disposal}", value_input_option='USER_ENTERED')
+                    pizza_waste.update(
+                        f"B{i + 17}", f"{disposal}", value_input_option='USER_ENTERED'
+                        )
                     break
                 except ValueError:
                     print('Please enter a whole number')
@@ -136,7 +153,11 @@ def calculate_production_plan():
     for i, pizza in enumerate(pizza_list[1:]):
         sale = int(pizza_sales.acell(f"{convert_day()}{i + 2}").value)
         target = sale * 1.1
-        pizza_production.update(f'{convert_day()}{i + 2}', f"{round(target)}", value_input_option='USER_ENTERED')
+        pizza_production.update(
+            f'{convert_day()}{i + 2}', 
+            f"{round(target)}", 
+            value_input_option='USER_ENTERED'
+            )
 
 
 def display_producion_plan():
@@ -148,7 +169,9 @@ def display_producion_plan():
     print(f'Production plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
     
     for i, pizza in enumerate(pizza_list[1:]):
-        print(f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}')
+        print(
+            f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}'
+            )
 
     start_program()
 
@@ -157,14 +180,14 @@ def option_select():
     """"
     Select which function to use
     """
-    print('Please select an option...')
+    print('\nPlease select an option...\n')
     print('> 1: Display Pizza Menu')
     print('> 2: Input Sales')
     print('> 3: Input Disposals')
     print('> 4: View Production Plan')
     print('> 6: Exit\n')
 
-    user_selection = input('Input Option Number: ')
+    user_selection = input('Input Option Number: \n')
     if user_selection == "1":
         print('\nDisplaying Pizza Menu...\n')
         display_pizzas()
@@ -192,8 +215,9 @@ def start_program():
     """
     option_select()
 
-
+print('\n***')
 print('\nWelcome to the Pazuzu Pizza App\n')
+print('***\n')
 
 start_program()
 
