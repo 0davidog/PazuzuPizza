@@ -28,7 +28,7 @@ def display_pizzas():
         pizza_str = ', '.join(pizza)
         print(f'{i + 1}: {pizza_str}')
     print('\n')
-    start_program()
+
 
 def convert_day():
     """
@@ -48,7 +48,7 @@ def convert_day():
     elif day == "Sat":
         return "G"
     elif day == "sun":
-        return "H"  
+        return "H"
 
 
 def input_sales():
@@ -68,11 +68,10 @@ def input_sales():
                 break
             except ValueError:
                 print('Please enter a whole number')
-    print('\nThank you. Updating production plan for next week.\n')
+    print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
-    print('Production plan updated succesfully.')
-    start_program()            
-        
+    print('Production plan updated succesfully.\n')           
+
 
 def input_waste():
     """
@@ -138,7 +137,7 @@ def calculate_production_plan():
         sale = int(pizza_sales.acell(f"{convert_day()}{i + 2}").value)
         target = sale * 1.1
         pizza_production.update(f'{convert_day()}{i + 2}', f"{round(target)}", value_input_option='USER_ENTERED')
-    
+
 
 def display_producion_plan():
     """
@@ -152,7 +151,7 @@ def display_producion_plan():
         print(f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}')
 
     start_program()
-    
+
 
 def option_select():
     """"
@@ -192,6 +191,7 @@ def start_program():
     Activate Functions
     """
     option_select()
+
 
 print('\nWelcome to the Pazuzu Pizza App\n')
 

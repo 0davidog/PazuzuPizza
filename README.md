@@ -1,3 +1,51 @@
+# Pazuzu Pizza
+
+Author: David C. O'Gara
+
+-image-
+
+Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with their business requirements. 
+The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plans and stock order lists.
+
+## Live Site
+
+## Repository
+
+## How to Use
+
+## Features
+
+## Future Features
+
+## Planning Documentation
+
+Flow charts
+
+## Data Model
+
+## Libraries Used
+
+- gspread
+- datetime
+
+## Testing
+
+### Bugs
+
+### Remaining Bugs
+
+### Validator Testing
+
+PEP8
+
+## Deployment
+
+The project was deployed on Heroku using Code Institute's mock terminal.
+
+## Credits
+
+Code Institute.
+
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
