@@ -65,7 +65,9 @@ def input_sales():
     Imports pizza_sales worksheet from google sheets.
     For each product listed the user is asked to input sales figure.
     """
-    print(f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    print(
+        f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
+        )
     
     pizza_sales = SHEET.worksheet('pizza_sales')
     pizza_list = pizza_sales.col_values(1)
@@ -75,7 +77,9 @@ def input_sales():
             try:
                 sold = int(input(f"Enter sales for {pizza}: \n"))
                 pizza_sales.update(
-                    f"{convert_day()}{i + 2}", f"{sold}", value_input_option='USER_ENTERED'
+                    f"{convert_day()}{i + 2}", 
+                    f"{sold}", 
+                    value_input_option='USER_ENTERED'
                     )
                 break
             except ValueError:
@@ -113,8 +117,8 @@ def input_waste():
                         f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
                         )
                     break
-                except ValueError:
-                    print('Please enter a whole number')
+                except ValueError as e:
+                    print(f'Invalid entry: {e} Please enter a whole number\n')
         print('\n')            
         input_waste()            
     elif user_waste_selection == "2":
@@ -127,8 +131,8 @@ def input_waste():
                         f"B{i + 17}", f"{disposal}", value_input_option='USER_ENTERED'
                         )
                     break
-                except ValueError:
-                    print('Please enter a whole number')
+                except ValueError as e:
+                    print(f'Invalid entry: ({e}). Please enter a whole number\n')
         print('\n')            
         input_waste()            
     elif user_waste_selection == "3":
@@ -176,6 +180,69 @@ def display_producion_plan():
     start_program()
 
 
+class Pizza:
+    """
+    Class of pizza.
+    """
+    def __init__(self, kind, size, topping):
+        self.kind = kind
+        self.size = size
+        self.topping = topping
+
+    def desciption(self):
+        """
+        Return the pizza recipie to be printed.
+        """
+        return f"\n{self.size} {self.kind} recipie:\n{self.topping}\n"
+    
+
+def select_pizza_recipie():
+
+    pizza_recipie = SHEET.worksheet('pizza_recipie')
+    pizza_list = pizza_recipie.col_values(1)
+
+    print('\nPlease select a size:\n')
+    print('> Small (s)')
+    print('> Large (l)\n')
+    try:
+        size_chosen = input('Choose s / l:\n')
+        if size_chosen == "s":
+            print('Please select a pizza')
+            for i, pizza in enumerate(pizza_list[1:8]):
+                print(f'> {i}: {pizza}')
+        elif size_chosen == "l":
+            print('Please select a pizza')
+            for i, pizza in enumerate(pizza_list[8:15]):
+                print(f'> {i + 7}: {pizza}')
+    except ValueError as e:
+        print(f'Invalid entry: {e} Please the letter s or l\n')
+    try:
+        pizza_chosen = int(input('Please select a pizza by number:\n'))
+        if pizza_chosen <= 15:
+            build_pizza_recipie(pizza_chosen)
+    except ValueError as e:
+        print(f'Invalid entry: {e} Please enter option as whole number.\n')
+
+
+def build_pizza_recipie(pizza_num):
+    pizza_recipie_list = SHEET.worksheet('pizza_recipie')
+    pizza_dictionary = pizza_recipie_list.get_all_records()
+    pizza_toppings = []
+    for key, value in pizza_dictionary[pizza_num].items():
+        if value == 0:
+            pass
+        elif key == 'Pizza':
+            pass
+        elif key == 'Size':
+            pass    
+        else:
+            pizza_toppings.append(f"{value} {key}")
+    toppings_str = ', '.join(pizza_toppings)
+    pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
+    print(pizza_recipie.desciption())
+    start_program()
+
+
 def option_select():
     """"
     Select which function to use
@@ -185,28 +252,35 @@ def option_select():
     print('> 2: Input Sales')
     print('> 3: Input Disposals')
     print('> 4: View Production Plan')
+    print('> 5: View Pizza Recipie')
     print('> 6: Exit\n')
 
     user_selection = input('Input Option Number: \n')
-    if user_selection == "1":
-        print('\nDisplaying Pizza Menu...\n')
-        display_pizzas()
-    elif user_selection == "2":
-        print('\nRecording sales...\n')
-        input_sales()
-        start_program()
-    elif user_selection == "3":
-        print('\nRecording waste...\n')
-        input_waste()
-    elif user_selection == "4":
-        print('\nDisplaying Production Plan...\n')
-        display_producion_plan()
-    elif user_selection == "6":
-        print('exit\n')    
-    else:
-        print('Please select valid option')
-        print('Only the option number is required')
-        start_program() 
+    try:
+        if user_selection == "1":
+            print('\nDisplaying Pizza Menu...\n')
+            display_pizzas()
+        elif user_selection == "2":
+            print('\nRecording sales...\n')
+            input_sales()
+            start_program()
+        elif user_selection == "3":
+            print('\nRecording waste...\n')
+            input_waste()
+        elif user_selection == "4":
+            print('\nDisplaying Production Plan...\n')
+            display_producion_plan()
+        elif user_selection == "5":
+            print('\nDisplaying Recipie...\n')
+            select_pizza_recipie()    
+        elif user_selection == "6":
+            print('exit\n')    
+        else:
+            print('Please select valid option')
+            print('Only the option number is required')
+            start_program()
+    except ValueError as e:
+        print(f'Invalid entry: ({e}). Only the option number is required\n')   
 
 
 def start_program():
@@ -219,5 +293,5 @@ print('\n***')
 print('\nWelcome to the Pazuzu Pizza App\n')
 print('***\n')
 
-start_program()
 
+start_program()
