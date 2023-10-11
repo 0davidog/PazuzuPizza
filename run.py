@@ -8,6 +8,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 
 # Code to access gspread and google drive from love-sandwiches walkthough project
+
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -19,13 +20,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 
+# End of Love-Sandwiches walkthrough code
+
 
 def display_pizzas():
     """
     Display the list of pre-made pizzas available.
     List is pulled from google sheets, ignoring first cell in column.
-    List is then numbered and displayed without square brackets.
-    Start_program funnction is then called to return user to menu.
+    For each item in the list item is numbered and printed without square brackets.
+    Start_program function is then called to return user to menu.
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
@@ -64,6 +67,7 @@ def input_sales():
     Function to input sales figures.
     Imports pizza_sales worksheet from google sheets.
     For each product listed the user is asked to input sales figure.
+    Input is then added to spreadsheet.
     """
     print(
         f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
@@ -92,7 +96,11 @@ def input_sales():
 
 def input_waste():
     """
-    Function to record wasteage
+    Function to record waste.
+    Pulls data from spreadsheet to form list.
+    Ask user which section of the list they want to edit.
+    Ask user to enter disposal figure for chosen half of list.
+    Update spreadsheet with input.
     """
     print(f'Disposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
 
@@ -166,7 +174,8 @@ def calculate_production_plan():
 
 def display_producion_plan():
     """
-    Function to view todays production plan
+    Function to view todays production plan.
+    Pulls production plan from google sheet based on day of the week.
     """
     pizza_production = SHEET.worksheet('pizza_production')
     pizza_list = pizza_production.col_values(1)
@@ -183,6 +192,7 @@ def display_producion_plan():
 class Pizza:
     """
     Class of pizza.
+    Forms a description/recipie using given data.
     """
     def __init__(self, kind, size, topping):
         self.kind = kind
@@ -197,6 +207,9 @@ class Pizza:
     
 
 def select_pizza_recipie():
+    """
+    Function to select a pizza recipie to view.
+    """
 
     pizza_recipie = SHEET.worksheet('pizza_recipie')
     pizza_list = pizza_recipie.col_values(1)
@@ -225,9 +238,14 @@ def select_pizza_recipie():
 
 
 def build_pizza_recipie(pizza_num):
+    """
+    Function
+    """
+    
     pizza_recipie_list = SHEET.worksheet('pizza_recipie')
     pizza_dictionary = pizza_recipie_list.get_all_records()
     pizza_toppings = []
+    
     for key, value in pizza_dictionary[pizza_num].items():
         if value == 0:
             pass
@@ -237,6 +255,7 @@ def build_pizza_recipie(pizza_num):
             pass    
         else:
             pizza_toppings.append(f"{value} {key}")
+    
     toppings_str = ', '.join(pizza_toppings)
     pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
     print(pizza_recipie.desciption())
@@ -245,7 +264,9 @@ def build_pizza_recipie(pizza_num):
 
 def option_select():
     """"
-    Select which function to use
+    Function acts as main-menu
+    Ask user to select which function to use.
+    Use if statement to activate chosen function.
     """
     print('\nPlease select an option...\n')
     print('> 1: Display Pizza Menu')
