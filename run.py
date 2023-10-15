@@ -36,6 +36,7 @@ def display_pizzas():
         pizza_str = ', '.join(pizza)
         print(f'{i + 1}: {pizza_str}')
     print('\n')
+    input("Press Enter to continue...\n")
     start_program()
 
 
@@ -58,7 +59,7 @@ def convert_day():
         return "F"
     elif day == "Sat":
         return "G"
-    elif day == "sun":
+    elif day == "Sun":
         return "H"
 
 
@@ -91,6 +92,7 @@ def input_sales():
     print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
     print('Production plan updated succesfully.\n')
+    input("Press Enter to continue...\n")
     start_program()        
 
 
@@ -122,6 +124,7 @@ def input_waste():
                 break
             except ValueError as e:
                 print(f'Invalid entry: {e} Please enter a whole number\n')
+    input("Press Enter to continue...\n")
     start_program()
 
 
@@ -156,10 +159,13 @@ def display_producion_plan():
     print(f'Production plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
     
     for i, pizza in enumerate(pizza_list[1:]):
-        print(
-            f'{pizza}: {pizza_production.acell(f"{convert_day()}{i + 2}").value}'
-            )
+        try:
+            cell_value = pizza_production.acell(f"{convert_day()}{i + 2}").value
+            print(f'{pizza}: {cell_value}')
+        except Exception as e:
+            print(f'Error: An unexpected error occurred - {e}')
 
+    input("Press Enter to continue...\n")
     start_program()
 
 
@@ -233,6 +239,7 @@ def build_pizza_recipie(pizza_num):
     toppings_str = ', '.join(pizza_toppings)
     pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
     print(pizza_recipie.desciption())
+    input("Press Enter to continue...\n")
     start_program()
 
 
