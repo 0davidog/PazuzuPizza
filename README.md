@@ -17,15 +17,37 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## How to Use
 
+- The user is first asked to select option. This is done by inputting the option number.
+- Selecting 1. 'Display Menu' brings up a list of pizza styles the company makes.
+- Selecting 2. 'Input Sales' asks the user to input a number for each pizza.
+- Selecting 3. 'Input Disosals' brings up another option choice:
+  - Selecting disposal option 1.
+  - Selecting disposal option 2.
+  - Selecting disposal option 3.
+- Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for todays date..
+- Selecting 5. 'View Pizza Recipie' asks the user to choose a pizza by number and then displays the recipie for the chosen pizza.
+  
 ## Features
 
+- ### Display Menu
+- ### Input Sales
+- ### Input Disposals
+- ### View Production Plan
+- ### View Pizza Recipie
+
 ## Future Features
+
+- pizza stock
+- employee login
 
 ## Planning Documentation
 
 Flow charts
 
 ## Data Model
+
+- pizza class
+- employee class
 
 ## Libraries Used
 
@@ -50,6 +72,7 @@ The project was deployed on Heroku using Code Institute's mock terminal.
 
 Code Institute.
 
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
