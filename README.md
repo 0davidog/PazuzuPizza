@@ -17,19 +17,23 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## How to Use
 
+![Screenshot 2023-10-15 at 15-02-38 Python Terminal by Code Institute](https://github.com/0davidog/PazuzuPizza/assets/135815736/225d791a-3508-4dd7-b3b4-8878fee82025)
+
 - The user is first asked to select option. This is done by inputting the option number.
 - Selecting 1. 'Display Menu' brings up a list of pizza styles the company makes.
 - Selecting 2. 'Input Sales' asks the user to input a number for each pizza.
 - Selecting 3. 'Input Disosals' brings up another option choice:
-  - Selecting disposal option 1.
-  - Selecting disposal option 2.
-  - Selecting disposal option 3.
+  - Selecting disposal option 1 asks user to input disposal number for each pizza ingredient.
+  - Selecting disposal option 2 asks user to input disposal number for each pre-made pizza.
+  - Selecting disposal option 3 exits the disposal menu and returns to main options.
 - Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for todays date..
 - Selecting 5. 'View Pizza Recipie' asks the user to choose a pizza by number and then displays the recipie for the chosen pizza.
   
 ## Features
 
 - ### Display Menu
+  ![Screenshot 2023-10-15 at 15-03-01 Python Terminal by Code Institute](https://github.com/0davidog/PazuzuPizza/assets/135815736/24514156-f485-4514-81cc-130ac251ad37)
+
 - ### Input Sales
 - ### Input Disposals
 - ### View Production Plan
