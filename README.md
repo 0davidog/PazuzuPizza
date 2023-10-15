@@ -43,7 +43,8 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## Planning Documentation
 
-Flow charts
+Flow chart for 'input sales' function:
+![input_sales drawio(1)](https://github.com/0davidog/PazuzuPizza/assets/135815736/aac4bf20-a68b-48a2-96d4-d4d7705c8ad2)
 
 ## Data Model
 
