@@ -104,6 +104,7 @@ def input_waste():
     print(f'Disposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
 
     pizza_waste = SHEET.worksheet('pizza_disposals')
+    pizza_stock = SHEET.worksheet('pizza_stock')
     disposal_list = pizza_waste.col_values(1)
     ingredient_disposal = disposal_list[1:]
 
@@ -115,10 +116,13 @@ def input_waste():
                 pizza_waste.update(
                     f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
                     )
+                current_stock = int(pizza_stock.acell(f"B{i + 2}").value)
+                pizza_stock.update(
+                    f"B{i + 2}", f"{current_stock - disposal}", value_input_option='USER_ENTERED')
                 break
             except ValueError as e:
                 print(f'Invalid entry: {e} Please enter a whole number\n')
-        start_program()
+    start_program()
 
 
 def calculate_production_plan():
