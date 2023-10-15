@@ -98,57 +98,27 @@ def input_waste():
     """
     Function to record waste.
     Pulls data from spreadsheet to form list.
-    Ask user which section of the list they want to edit.
-    Ask user to enter disposal figure for chosen half of list.
+    Ask user to enter disposal figure for each item.
     Update spreadsheet with input.
     """
     print(f'Disposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
 
     pizza_waste = SHEET.worksheet('pizza_disposals')
     disposal_list = pizza_waste.col_values(1)
-    ingredient_disposal = disposal_list[1:16]
-    pizza_disposal = disposal_list[16:30]
+    ingredient_disposal = disposal_list[1:]
 
-    print('Please select an option...')
-    print('> 1: Ingredients Disposal')
-    print('> 2: Pizza Disposal')
-    print('> 3: Exit\n')
-
-    user_waste_selection = input('Input Option Number: ')
-    if user_waste_selection == "1":
-        print('\nRecording pizza ingredient disposals...\n')
-        for i, ingredient in enumerate(ingredient_disposal):
-            while True:
-                try:
-                    disposal = int(input(f"Enter disposal number for {ingredient}: "))
-                    pizza_waste.update(
-                        f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
-                        )
-                    break
-                except ValueError as e:
-                    print(f'Invalid entry: {e} Please enter a whole number\n')
-        print('\n')            
-        input_waste()            
-    elif user_waste_selection == "2":
-        print('\nRecording pre-made pizza disposals...\n')
-        for i, pizza in enumerate(pizza_disposal):
-            while True:
-                try:
-                    disposal = int(input(f"Enter disposal number for {pizza}: "))
-                    pizza_waste.update(
-                        f"B{i + 17}", f"{disposal}", value_input_option='USER_ENTERED'
-                        )
-                    break
-                except ValueError as e:
-                    print(f'Invalid entry: ({e}). Please enter a whole number\n')
-        print('\n')            
-        input_waste()            
-    elif user_waste_selection == "3":
+    print('\nRecording pizza ingredient disposals...\n')
+    for i, ingredient in enumerate(ingredient_disposal):
+        while True:
+            try:
+                disposal = int(input(f"Enter disposal number for {ingredient}: "))
+                pizza_waste.update(
+                    f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
+                    )
+                break
+            except ValueError as e:
+                print(f'Invalid entry: {e} Please enter a whole number\n')
         start_program()
-    else:
-        print('Please select valid option')
-        print('Only the option number is required')
-        input_waste()
 
 
 def calculate_production_plan():
