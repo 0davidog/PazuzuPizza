@@ -204,15 +204,19 @@ def select_pizza_recipie():
             for i, pizza in enumerate(pizza_list[1:8]):
                 print(f'> {i}: {pizza}')
         elif size_chosen == "l":
-            print('Please select a pizza')
+            print('\nPlease select a pizza:')
             for i, pizza in enumerate(pizza_list[8:15]):
                 print(f'> {i + 7}: {pizza}')
+        else:
+            print("Please enter either 's' or 'l' in lower case.\n")
+            select_pizza_recipie()                
     except ValueError as e:
         print(f'Invalid entry: {e} Please the letter s or l\n')
     try:
-        pizza_chosen = int(input('Please select a pizza by number:\n'))
+        pizza_chosen = int(input('\nPlease select a pizza by number:\n'))
         if pizza_chosen <= 15:
             build_pizza_recipie(pizza_chosen)
+            return pizza_chosen
     except ValueError as e:
         print(f'Invalid entry: {e} Please enter option as whole number.\n')
 
