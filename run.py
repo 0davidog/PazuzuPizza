@@ -186,7 +186,7 @@ class Pizza:
         return f"\n{self.size} {self.kind} recipie:\n{self.topping}\n"
     
 
-def select_pizza_recipie():
+def select_pizza_recipie_size():
     """
     Function to select a pizza recipie to view.
     """
@@ -209,14 +209,20 @@ def select_pizza_recipie():
                 print(f'> {i + 7}: {pizza}')
         else:
             print("Please enter either 's' or 'l' in lower case.\n")
-            select_pizza_recipie()                
+            select_pizza_recipie_size()                
     except ValueError as e:
         print(f'Invalid entry: {e} Please the letter s or l\n')
+    select_pizza_recipie()    
+
+def select_pizza_recipie():     
     try:
         pizza_chosen = int(input('\nPlease select a pizza by number:\n'))
-        if pizza_chosen <= 15:
+        if pizza_chosen <= 13:
             build_pizza_recipie(pizza_chosen)
             return pizza_chosen
+        else:
+            print('Please select a number between 1 and 15\n')
+            select_pizza_recipie()
     except ValueError as e:
         print(f'Invalid entry: {e} Please enter option as whole number.\n')
 
@@ -278,7 +284,7 @@ def option_select():
             display_producion_plan()
         elif user_selection == "5":
             print('\nDisplaying Recipie...\n')
-            select_pizza_recipie()    
+            select_pizza_recipie_size()    
         elif user_selection == "6":
             print('exit\n')    
         else:
