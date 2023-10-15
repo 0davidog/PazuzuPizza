@@ -221,7 +221,7 @@ def select_pizza_recipie():
             build_pizza_recipie(pizza_chosen)
             return pizza_chosen
         else:
-            print('Please select a number between 1 and 15\n')
+            print('Please select a number between 1 and 13\n')
             select_pizza_recipie()
     except ValueError as e:
         print(f'Invalid entry: {e} Please enter option as whole number.\n')
@@ -246,7 +246,7 @@ def build_pizza_recipie(pizza_num):
         else:
             pizza_toppings.append(f"{value} {key}")
     
-    toppings_str = ', '.join(pizza_toppings)
+    toppings_str = ', \n'.join(pizza_toppings)
     pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
     print(pizza_recipie.desciption())
     input("Press Enter to continue...\n")
