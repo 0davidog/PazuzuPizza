@@ -4,6 +4,8 @@
 
 # Module imports
 import gspread
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 import colorama
