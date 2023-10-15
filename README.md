@@ -48,8 +48,7 @@ Flow chart for 'input sales' function:
 
 ## Data Model
 
-- pizza class
-- employee class
+- pizza class?
 
 ## Libraries Used
 
@@ -58,7 +57,25 @@ Flow chart for 'input sales' function:
 
 ## Testing
 
+(I have manually tested by doing the following...)
+- pep8
+- input tests
+- local and heroku
+
 ### Bugs
+
+- warning once per round
+
+```
+C:\Users\David\OneDrive\Documents\00WebDev\pazuzupizza\PazuzuPizza\.venv\Lib\site-packages\gspread\worksheet.py:1069: UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'
+  warnings.warn(
+```
+
+- (error occured because I had Sun in lowercase)
+```
+Error: An unexpected error occurred - {'code': 400, 'message': "Unable to parse range: 'pizza_production'!NONE2", 'status': 'INVALID_ARGUMENT'}
+```
+- get stuck in select pizza recipie
 
 ### Remaining Bugs
 
