@@ -1,15 +1,19 @@
 # Pazuzu Pizza
 
+![pazuzu-cover-images](https://github.com/0davidog/PazuzuPizza/assets/135815736/50a329f8-8860-48f1-af60-b152dc235c0e)
+
 Author: David C. O'Gara
 
--image-
-
-Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with their business requirements. 
-The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plans and stock order lists.
+Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with sales and stock of their buisness. 
+The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plan and offering access to other useful information such as pizza recipies and menu lists.
 
 ## Live Site
 
+[Pazuzu Pizza via Heroku](https://pazuzuz-pizza-b36de06442d6.herokuapp.com/)
+
 ## Repository
+
+[Pazuzu Pizza Repository on Github](https://github.com/0davidog/PazuzuPizza)
 
 ## How to Use
 
