@@ -6,6 +6,8 @@
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
+import colorama
+from colorama import Fore
 
 # Code to access gspread and google drive from love-sandwiches walkthough project
 
@@ -301,7 +303,7 @@ def start_program():
     """
     option_select()
 
-print('\n***')
+print(Fore.GREEN + '\n***')
 print('\nWelcome to the Pazuzu Pizza App\n')
 print('***\n')
 
