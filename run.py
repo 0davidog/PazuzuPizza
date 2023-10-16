@@ -35,10 +35,11 @@ def display_pizzas():
     Display the list of pre-made pizzas available.
     List is pulled from google sheets, ignoring first cell in column.
     For each item in the list item is numbered and printed without square brackets.
-    Start_program function is then called to return user to menu.
+    option_select function is then called to return user to menu.
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
+    print('\n')
     for i, pizza in enumerate(menu_list[1:]):
         pizza_str = ', '.join(pizza)
         time.sleep(0.5)
@@ -47,7 +48,7 @@ def display_pizzas():
     print('\n')
     time.sleep(0.5)
     input("Press Enter to continue...\n")
-    start_program()
+    option_select()
 
 
 def convert_day():
@@ -82,7 +83,7 @@ def input_sales():
     """
     time.sleep(0.5)
     print(
-        f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
+        f'\nSales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
         )
     
     pizza_sales = SHEET.worksheet('pizza_sales')
@@ -108,8 +109,7 @@ def input_sales():
     print('Production plan updated succesfully.\n')
     time.sleep(0.5)
     input("Press Enter to continue...\n")
-    start_program()        
-
+    option_select()
 
 def input_waste():
     """
@@ -118,7 +118,7 @@ def input_waste():
     Ask user to enter disposal figure for each item.
     Update spreadsheet with input.
     """
-    print(f'Disposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    print(f'\nDisposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
 
     pizza_waste = SHEET.worksheet('pizza_disposals')
     pizza_stock = SHEET.worksheet('pizza_stock')
@@ -143,7 +143,7 @@ def input_waste():
                 print(f'Invalid entry: {e} Please enter a whole number\n')
     time.sleep(0.5)
     input("Press Enter to continue...\n")
-    start_program()
+    option_select()
 
 
 def calculate_production_plan():
@@ -175,7 +175,7 @@ def display_producion_plan():
     pizza_production = SHEET.worksheet('pizza_production')
     pizza_list = pizza_production.col_values(1)
     time.sleep(0.5)
-    print(f'Production plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    print(f'\nProduction plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
     
     for i, pizza in enumerate(pizza_list[1:]):
         try:
@@ -187,7 +187,7 @@ def display_producion_plan():
             print(f'Error: An unexpected error occurred - {e}')
     time.sleep(0.5)
     input("Press Enter to continue...\n")
-    start_program()
+    option_select()
 
 
 class Pizza:
@@ -235,11 +235,11 @@ def select_pizza_recipie_size():
                 print(f'> {i + 7}: {pizza}')
         else:
             time.sleep(0.5)
-            print("Please enter either 's' or 'l' in lower case.\n")
+            print("\nPlease enter either 's' or 'l' in lower case.\n")
             select_pizza_recipie_size()                
     except ValueError as e:
         time.sleep(0.5)
-        print(f'Invalid entry: {e} Please the letter s or l\n')
+        print(f'\nInvalid entry: {e} Please the letter s or l\n')
     select_pizza_recipie()    
 
 def select_pizza_recipie():     
@@ -250,11 +250,11 @@ def select_pizza_recipie():
             return pizza_chosen
         else:
             time.sleep(0.5)
-            print('Please select a number between 1 and 13\n')
+            print('\nPlease select a number between 1 and 13\n')
             select_pizza_recipie()
     except ValueError as e:
         time.sleep(0.5)
-        print(f'Invalid entry: {e} Please enter option as whole number.\n')
+        print(f'\nInvalid entry: {e} Please enter option as whole number.\n')
 
 
 def build_pizza_recipie(pizza_num):
@@ -281,8 +281,18 @@ def build_pizza_recipie(pizza_num):
     time.sleep(0.5)
     print(pizza_recipie.desciption())
     time.sleep(0.5)
-    input("Press Enter to continue...\n")
-    start_program()
+    input("\nPress Enter to continue...\n")
+    option_select()
+
+
+def delivery():
+    pizza_stock = SHEET.worksheet('pizza_stock')
+    pizza_delivery = SHEET.worksheet('pizza_delivery')
+    stock_list = pizza_delivery.col_values(1)
+    for i, stock in enumerate(stock_list[1:]):
+        delivery_value = int(pizza_delivery.acell(f'B{i + 2}').value)
+        current_stock = int(pizza_stock.acell(f'B{i + 2}').value)
+        pizza_stock.update(f'B{i + 2}', f'{current_stock + delivery_value}')
 
 
 def option_select():
@@ -318,7 +328,7 @@ def option_select():
             print('\nRecording sales...')
             loading_animation()
             input_sales()
-            start_program()
+            option_select()
         elif user_selection == "3":
             time.sleep(0.5)
             print('\nRecording waste...')
@@ -339,7 +349,7 @@ def option_select():
             print('\nExiting program...')
             loading_animation()
             time.sleep(0.5)
-            print('Thank you for using the Pazuzu Pizza App.\n')
+            print('\nThank you for using the Pazuzu Pizza App.\n')
             time.sleep(0.5)
             sys.exit('Select [Run Program] button at the top to restart.\n')
         else:
@@ -348,7 +358,7 @@ def option_select():
             time.sleep(0.5)
             print('Only the option number is required')
             time.sleep(0.5)
-            start_program()
+            option_select()
     except ValueError as e:
         time.sleep(0.5)
         print(f'Invalid entry: ({e}). Only the option number is required\n')   
