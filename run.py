@@ -322,26 +322,30 @@ def loading_animation():
         sys.stdout.flush()
 
 
+def intro():
+    """
+    Function displays title and intro messages
+    """
+    time.sleep(1)
+    loading_animation()
+    time.sleep(1)
+    title = pyfiglet.figlet_format("Pazuzu Pizza") 
+    print(title) 
+    time.sleep(2)
+    print('Welcome to the Pazuzu Pizza App\n')
+    time.sleep(1)
+    input("Press Enter to continue...")
+    time.sleep(1)
+    loading_animation()
+    time.sleep(1)
+
+
 def start_program():
     """
     Activate Functions
     """
+    intro()
     option_select()
-
-
-
-time.sleep(1)
-loading_animation()
-time.sleep(1)
-welcome = pyfiglet.figlet_format("Pazuzu Pizza") 
-print(welcome) 
-time.sleep(2)
-print('Welcome to the Pazuzu Pizza App\n')
-time.sleep(1)
-input("Press Enter to continue...\n")
-time.sleep(1)
-loading_animation()
-time.sleep(1)
 
 
 start_program()
