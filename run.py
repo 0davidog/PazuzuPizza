@@ -314,22 +314,34 @@ def option_select():
         print(f'Invalid entry: ({e}). Only the option number is required\n')   
 
 
+def loading_animation():
+    waiting = '\n***\n'
+    for char in waiting:
+        time.sleep(0.5)
+        sys.stdout.write(Fore.GREEN + char)
+        sys.stdout.flush()
+
+
 def start_program():
     """
     Activate Functions
     """
     option_select()
 
-time.sleep(0.5)
-print(Fore.GREEN + '\n***')
-time.sleep(0.5)
+
+
+time.sleep(1)
+loading_animation()
+time.sleep(1)
 welcome = pyfiglet.figlet_format("Pazuzu Pizza") 
 print(welcome) 
-time.sleep(0.5)
+time.sleep(2)
 print('Welcome to the Pazuzu Pizza App\n')
-time.sleep(0.5)
-print('***\n')
-time.sleep(0.5)
+time.sleep(1)
+input("Press Enter to continue...\n")
+time.sleep(1)
+loading_animation()
+time.sleep(1)
 
 
 start_program()
