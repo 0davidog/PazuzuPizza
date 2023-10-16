@@ -255,7 +255,9 @@ def select_pizza_recipie_size():
     time.sleep(0.5)
     print('> Large (l)\n')
     try:
+        green_text()
         size_chosen = input('Choose s / l:\n')
+        reset_color()
         if size_chosen == "s":
             time.sleep(0.5)
             print('Please select a pizza')
@@ -265,6 +267,7 @@ def select_pizza_recipie_size():
         elif size_chosen == "l":
             time.sleep(0.5)
             print('\nPlease select a pizza:')
+            reset_color()
             for i, pizza in enumerate(pizza_list[8:15]):
                 time.sleep(0.5)
                 print(f'> {i + 7}: {pizza}')
@@ -453,9 +456,7 @@ def intro():
     loading_animation()
     time.sleep(1)
     title = pyfiglet.figlet_format("Pazuzu Pizza") 
-    green_text()
     print(title)
-    reset_color()
     time.sleep(2)
     print('Welcome to the Pazuzu Pizza App\n')
     time.sleep(1)
