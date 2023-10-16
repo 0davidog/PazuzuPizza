@@ -285,6 +285,12 @@ def build_pizza_recipie(pizza_num):
     option_select()
 
 
+def weekly_delivery():
+    day = datetime.now().strftime("%a")
+    if day == "Mon":
+        delivery()
+
+
 def delivery():
     pizza_stock = SHEET.worksheet('pizza_stock')
     pizza_delivery = SHEET.worksheet('pizza_delivery')
@@ -292,7 +298,15 @@ def delivery():
     for i, stock in enumerate(stock_list[1:]):
         delivery_value = int(pizza_delivery.acell(f'B{i + 2}').value)
         current_stock = int(pizza_stock.acell(f'B{i + 2}').value)
-        pizza_stock.update(f'B{i + 2}', f'{current_stock + delivery_value}')
+        if current_stock >= delivery_value:
+            print('\nNOTICE: No weekly delivery received.')
+            time.sleep(0.5)
+            break
+        else:    
+            pizza_stock.update(f'B{i + 2}', f'{current_stock + delivery_value}', value_input_option='USER_ENTERED')
+            print('\nNOTICE: Weekly delivery has been received.')
+            time.sleep(0.5)
+            print('Stock list updated.')
 
 
 def option_select():
@@ -395,6 +409,7 @@ def start_program():
     Activate Functions
     """
     intro()
+    weekly_delivery()
     option_select()
 
 
