@@ -3,6 +3,7 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 
 # Module imports
+import sys
 import gspread
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -290,7 +291,9 @@ def option_select():
             print('\nDisplaying Recipie...\n')
             select_pizza_recipie_size()    
         elif user_selection == "6":
-            print('exit\n')    
+            print('\nExiting program...\n')
+            print('Thank you for using the Pazuzu Pizza App.\n')
+            sys.exit('Select [Run Program] button at the top to restart.\n')
         else:
             print('Please select valid option')
             print('Only the option number is required')
