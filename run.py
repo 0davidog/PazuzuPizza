@@ -41,8 +41,11 @@ def display_pizzas():
     menu_list = pizza_menu.get_all_values()
     for i, pizza in enumerate(menu_list[1:]):
         pizza_str = ', '.join(pizza)
+        time.sleep(0.5)
         print(f'{i + 1}: {pizza_str}')
+    time.sleep(0.5)    
     print('\n')
+    time.sleep(0.5)
     input("Press Enter to continue...\n")
     start_program()
 
@@ -77,6 +80,7 @@ def input_sales():
     For each product listed the user is asked to input sales figure.
     Input is then added to spreadsheet.
     """
+    time.sleep(0.5)
     print(
         f'Sales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
         )
@@ -87,6 +91,7 @@ def input_sales():
     for i, pizza in enumerate(pizza_list[1:]):
         while True:
             try:
+                time.sleep(0.5)
                 sold = int(input(f"Enter sales for {pizza}: \n"))
                 pizza_sales.update(
                     f"{convert_day()}{i + 2}", 
@@ -95,10 +100,13 @@ def input_sales():
                     )
                 break
             except ValueError:
+                time.sleep(0.5)
                 print('Please enter a whole number')
+    time.sleep(0.5)
     print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
     print('Production plan updated succesfully.\n')
+    time.sleep(0.5)
     input("Press Enter to continue...\n")
     start_program()        
 
@@ -116,11 +124,12 @@ def input_waste():
     pizza_stock = SHEET.worksheet('pizza_stock')
     disposal_list = pizza_waste.col_values(1)
     ingredient_disposal = disposal_list[1:]
-
+    time.sleep(0.5)
     print('\nRecording pizza ingredient disposals...\n')
     for i, ingredient in enumerate(ingredient_disposal):
         while True:
             try:
+                time.sleep(0.5)
                 disposal = int(input(f"Enter disposal number for {ingredient}: "))
                 pizza_waste.update(
                     f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
@@ -130,7 +139,9 @@ def input_waste():
                     f"B{i + 2}", f"{current_stock - disposal}", value_input_option='USER_ENTERED')
                 break
             except ValueError as e:
+                time.sleep(0.5)
                 print(f'Invalid entry: {e} Please enter a whole number\n')
+    time.sleep(0.5)
     input("Press Enter to continue...\n")
     start_program()
 
@@ -163,15 +174,18 @@ def display_producion_plan():
     """
     pizza_production = SHEET.worksheet('pizza_production')
     pizza_list = pizza_production.col_values(1)
+    time.sleep(0.5)
     print(f'Production plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
     
     for i, pizza in enumerate(pizza_list[1:]):
         try:
             cell_value = pizza_production.acell(f"{convert_day()}{i + 2}").value
+            time.sleep(0.5)
             print(f'{pizza}: {cell_value}')
         except Exception as e:
+            time.sleep(0.5)
             print(f'Error: An unexpected error occurred - {e}')
-
+    time.sleep(0.5)
     input("Press Enter to continue...\n")
     start_program()
 
@@ -197,27 +211,34 @@ def select_pizza_recipie_size():
     """
     Function to select a pizza recipie to view.
     """
-
     pizza_recipie = SHEET.worksheet('pizza_recipie')
     pizza_list = pizza_recipie.col_values(1)
-
+    time.sleep(0.5)
     print('\nPlease select a size:\n')
+    time.sleep(0.5)
     print('> Small (s)')
+    time.sleep(0.5)
     print('> Large (l)\n')
     try:
         size_chosen = input('Choose s / l:\n')
         if size_chosen == "s":
+            time.sleep(0.5)
             print('Please select a pizza')
             for i, pizza in enumerate(pizza_list[1:8]):
+                time.sleep(0.5)
                 print(f'> {i}: {pizza}')
         elif size_chosen == "l":
+            time.sleep(0.5)
             print('\nPlease select a pizza:')
             for i, pizza in enumerate(pizza_list[8:15]):
+                time.sleep(0.5)
                 print(f'> {i + 7}: {pizza}')
         else:
+            time.sleep(0.5)
             print("Please enter either 's' or 'l' in lower case.\n")
             select_pizza_recipie_size()                
     except ValueError as e:
+        time.sleep(0.5)
         print(f'Invalid entry: {e} Please the letter s or l\n')
     select_pizza_recipie()    
 
@@ -228,9 +249,11 @@ def select_pizza_recipie():
             build_pizza_recipie(pizza_chosen)
             return pizza_chosen
         else:
+            time.sleep(0.5)
             print('Please select a number between 1 and 13\n')
             select_pizza_recipie()
     except ValueError as e:
+        time.sleep(0.5)
         print(f'Invalid entry: {e} Please enter option as whole number.\n')
 
 
@@ -255,7 +278,9 @@ def build_pizza_recipie(pizza_num):
     
     toppings_str = ', \n'.join(pizza_toppings)
     pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
+    time.sleep(0.5)
     print(pizza_recipie.desciption())
+    time.sleep(0.5)
     input("Press Enter to continue...\n")
     start_program()
 
@@ -284,33 +309,48 @@ def option_select():
     user_selection = input('Input Option Number: \n')
     try:
         if user_selection == "1":
-            print('\nDisplaying Pizza Menu...\n')
+            time.sleep(0.5)
+            print('\nDisplaying Pizza Menu...')
+            loading_animation()
             display_pizzas()
         elif user_selection == "2":
-            print('\nRecording sales...\n')
+            time.sleep(0.5)
+            print('\nRecording sales...')
+            loading_animation()
             input_sales()
             start_program()
         elif user_selection == "3":
-            print('\nRecording waste...\n')
+            time.sleep(0.5)
+            print('\nRecording waste...')
+            loading_animation()
             input_waste()
         elif user_selection == "4":
-            print('\nDisplaying Production Plan...\n')
+            time.sleep(0.5)
+            print('\nDisplaying Production Plan...')
+            loading_animation()
             display_producion_plan()
         elif user_selection == "5":
-            print('\nDisplaying Recipie...\n')
+            time.sleep(0.5)
+            print('\nDisplaying Recipie...')
+            loading_animation()
             select_pizza_recipie_size()    
         elif user_selection == "6":
             time.sleep(0.5)
-            print('\nExiting program...\n')
+            print('\nExiting program...')
+            loading_animation()
             time.sleep(0.5)
             print('Thank you for using the Pazuzu Pizza App.\n')
             time.sleep(0.5)
             sys.exit('Select [Run Program] button at the top to restart.\n')
         else:
+            time.sleep(0.5)
             print('Please select valid option')
+            time.sleep(0.5)
             print('Only the option number is required')
+            time.sleep(0.5)
             start_program()
     except ValueError as e:
+        time.sleep(0.5)
         print(f'Invalid entry: ({e}). Only the option number is required\n')   
 
 
