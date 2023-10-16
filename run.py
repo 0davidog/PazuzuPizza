@@ -12,6 +12,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import colorama
 from colorama import Fore
+from colorama import Style
 import pyfiglet
 
 # Code to access gspread and google drive from love-sandwiches walkthough project
@@ -28,6 +29,26 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 
 # End of Love-Sandwiches walkthrough code
+
+def green_text():
+    """
+    Function turns command line text green via colorama module.
+    """
+    print(Fore.GREEN)
+
+
+def red_text():
+    """
+    Function turns command line text red via colorama module.
+    """
+    print(Fore.RED)
+
+
+def reset_color():
+    """
+    Function resets command line text via colorama module.
+    """
+    print(Style.RESET_ALL)
 
 
 def display_pizzas():
@@ -47,7 +68,9 @@ def display_pizzas():
     time.sleep(0.5)    
     print('\n')
     time.sleep(0.5)
+    green_text()
     input("Press Enter to continue...\n")
+    reset_color()
     option_select()
 
 
@@ -102,13 +125,17 @@ def input_sales():
                 break
             except ValueError:
                 time.sleep(0.5)
+                red_text()
                 print('Please enter a whole number')
+                reset_color()
     time.sleep(0.5)
     print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
     print('Production plan updated succesfully.\n')
     time.sleep(0.5)
+    green_text()
     input("Press Enter to continue...\n")
+    reset_color()
     option_select()
 
 def input_waste():
@@ -140,9 +167,13 @@ def input_waste():
                 break
             except ValueError as e:
                 time.sleep(0.5)
+                red_text()
                 print(f'Invalid entry: {e} Please enter a whole number\n')
+                reset_color()
     time.sleep(0.5)
+    green_text()
     input("Press Enter to continue...\n")
+    reset_color()
     option_select()
 
 
@@ -184,9 +215,13 @@ def display_producion_plan():
             print(f'{pizza}: {cell_value}')
         except Exception as e:
             time.sleep(0.5)
+            red_text()
             print(f'Error: An unexpected error occurred - {e}')
+            reset_color()
     time.sleep(0.5)
+    green_text()
     input("Press Enter to continue...\n")
+    reset_color()
     option_select()
 
 
@@ -235,26 +270,36 @@ def select_pizza_recipie_size():
                 print(f'> {i + 7}: {pizza}')
         else:
             time.sleep(0.5)
+            red_text()
             print("\nPlease enter either 's' or 'l' in lower case.\n")
+            reset_color()
             select_pizza_recipie_size()                
     except ValueError as e:
         time.sleep(0.5)
+        red_text()
         print(f'\nInvalid entry: {e} Please the letter s or l\n')
+        reset_color()
     select_pizza_recipie()    
 
 def select_pizza_recipie():     
     try:
+        green_text()
         pizza_chosen = int(input('\nPlease select a pizza by number:\n'))
+        reset_color()
         if pizza_chosen <= 13:
             build_pizza_recipie(pizza_chosen)
             return pizza_chosen
         else:
             time.sleep(0.5)
+            red_text()
             print('\nPlease select a number between 1 and 13\n')
+            reset_color()
             select_pizza_recipie()
     except ValueError as e:
         time.sleep(0.5)
+        red_text()
         print(f'\nInvalid entry: {e} Please enter option as whole number.\n')
+        reset_color()
 
 
 def build_pizza_recipie(pizza_num):
@@ -281,7 +326,9 @@ def build_pizza_recipie(pizza_num):
     time.sleep(0.5)
     print(pizza_recipie.desciption())
     time.sleep(0.5)
+    green_text()
     input("\nPress Enter to continue...\n")
+    reset_color()
     option_select()
 
 
@@ -299,14 +346,18 @@ def delivery():
         delivery_value = int(pizza_delivery.acell(f'B{i + 2}').value)
         current_stock = int(pizza_stock.acell(f'B{i + 2}').value)
         if current_stock >= delivery_value:
+            red_text()
             print('\nNOTICE: No weekly delivery received.')
+            reset_color()
             time.sleep(0.5)
             break
         else:    
             pizza_stock.update(f'B{i + 2}', f'{current_stock + delivery_value}', value_input_option='USER_ENTERED')
+            red_text()
             print('\nNOTICE: Weekly delivery has been received.')
             time.sleep(0.5)
             print('Stock list updated.')
+            reset_color()
 
 
 def option_select():
@@ -330,7 +381,9 @@ def option_select():
     time.sleep(0.5)
     print('> 6: Exit\n')
     time.sleep(0.5)
+    green_text()
     user_selection = input('Input Option Number: \n')
+    reset_color()
     try:
         if user_selection == "1":
             time.sleep(0.5)
@@ -365,24 +418,30 @@ def option_select():
             time.sleep(0.5)
             print('\nThank you for using the Pazuzu Pizza App.\n')
             time.sleep(0.5)
+            red_text()
             sys.exit('Select [Run Program] button at the top to restart.\n')
+
         else:
             time.sleep(0.5)
+            red_text()
             print('Please select valid option')
             time.sleep(0.5)
             print('Only the option number is required')
             time.sleep(0.5)
+            reset_color()
             option_select()
     except ValueError as e:
         time.sleep(0.5)
-        print(f'Invalid entry: ({e}). Only the option number is required\n')   
+        red_text()
+        print(f'Invalid entry: ({e}). Only the option number is required\n')
+        reset_color()  
 
 
 def loading_animation():
     waiting = '\n***\n'
     for char in waiting:
         time.sleep(0.5)
-        sys.stdout.write(Fore.GREEN + char)
+        sys.stdout.write(char)
         sys.stdout.flush()
 
 
@@ -394,11 +453,15 @@ def intro():
     loading_animation()
     time.sleep(1)
     title = pyfiglet.figlet_format("Pazuzu Pizza") 
-    print(title) 
+    green_text()
+    print(title)
+    reset_color()
     time.sleep(2)
     print('Welcome to the Pazuzu Pizza App\n')
     time.sleep(1)
+    green_text()
     input("Press Enter to continue...")
+    reset_color()
     time.sleep(1)
     loading_animation()
     time.sleep(1)
