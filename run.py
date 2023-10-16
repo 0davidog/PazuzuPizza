@@ -4,6 +4,7 @@
 
 # Module imports
 import sys
+import time
 import gspread
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -11,6 +12,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import colorama
 from colorama import Fore
+import pyfiglet
 
 # Code to access gspread and google drive from love-sandwiches walkthough project
 
@@ -264,14 +266,21 @@ def option_select():
     Ask user to select which function to use.
     Use if statement to activate chosen function.
     """
+    time.sleep(0.5)
     print('\nPlease select an option...\n')
+    time.sleep(0.5)
     print('> 1: Display Pizza Menu')
+    time.sleep(0.5)
     print('> 2: Input Sales')
+    time.sleep(0.5)
     print('> 3: Input Disposals')
+    time.sleep(0.5)
     print('> 4: View Production Plan')
+    time.sleep(0.5)
     print('> 5: View Pizza Recipie')
+    time.sleep(0.5)
     print('> 6: Exit\n')
-
+    time.sleep(0.5)
     user_selection = input('Input Option Number: \n')
     try:
         if user_selection == "1":
@@ -291,8 +300,11 @@ def option_select():
             print('\nDisplaying Recipie...\n')
             select_pizza_recipie_size()    
         elif user_selection == "6":
+            time.sleep(0.5)
             print('\nExiting program...\n')
+            time.sleep(0.5)
             print('Thank you for using the Pazuzu Pizza App.\n')
+            time.sleep(0.5)
             sys.exit('Select [Run Program] button at the top to restart.\n')
         else:
             print('Please select valid option')
@@ -308,9 +320,16 @@ def start_program():
     """
     option_select()
 
+time.sleep(0.5)
 print(Fore.GREEN + '\n***')
-print('\nWelcome to the Pazuzu Pizza App\n')
+time.sleep(0.5)
+welcome = pyfiglet.figlet_format("Pazuzu Pizza") 
+print(welcome) 
+time.sleep(0.5)
+print('Welcome to the Pazuzu Pizza App\n')
+time.sleep(0.5)
 print('***\n')
+time.sleep(0.5)
 
 
 start_program()
