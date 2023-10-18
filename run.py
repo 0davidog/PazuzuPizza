@@ -5,6 +5,7 @@
 # Module imports
 import sys
 import time
+import maskpass
 import gspread
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
@@ -33,6 +34,7 @@ SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 def green_text():
     """
     Function turns command line text green via colorama module.
+    Call prior to a print statement or typing_animation.
     """
     print(Fore.GREEN)
 
@@ -40,6 +42,7 @@ def green_text():
 def red_text():
     """
     Function turns command line text red via colorama module.
+    Call prior to a print statement or typing_animation.
     """
     print(Fore.RED)
 
@@ -47,8 +50,107 @@ def red_text():
 def reset_color():
     """
     Function resets command line text via colorama module.
+    Call after a coloured print statement or typing_animation.
     """
     print(Style.RESET_ALL)
+
+
+def typing_animation(text, timing):
+    """
+    Function creates a short animation to represent text typed in real-time.
+    """
+    for char in text:
+        time.sleep(timing)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+
+
+def intro():
+    """
+    Function displays title and intro messages
+    """
+    time.sleep(1)
+    typing_animation('\n***\n', 0.5)
+    time.sleep(1)
+    title = pyfiglet.figlet_format("Pazuzu Pizza") 
+    print(title)
+    time.sleep(2)
+    typing_animation('Welcome to the Pazuzu Pizza App\n', 0.1)
+    time.sleep(1)
+    green_text()
+    typing_animation("Press Enter to continue...", 0.1)
+    input('\n')
+    reset_color()
+    time.sleep(1)
+    typing_animation('***\n', 0.5)
+    time.sleep(1)
+
+
+class Employee:
+    """
+    Creates class of employee to represent the user.
+
+    Attributes
+    ----------
+    username = str
+        Employee username. Checked against worksheet.
+    password = str
+        Employee password. Checked against worksheet.
+
+    Methods
+    -------
+    validate_login
+        Fetch data from 'employees' worksheet.
+        Establish relevant columns for username and password.
+        Check if username exists in username column.
+        check if password exists in password column.
+        Check if username and password are on same row.
+    """
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+    def validate_login(self):
+        employee_database = SHEET.worksheet('employees')
+        usernames = employee_database.col_values(1)[1:]
+        passwords = employee_database.col_values(2)[1:]
+        if self.username in usernames:
+            if self.password in passwords:
+                user_cell = employee_database.find(self.username)
+                pass_cell = employee_database.find(self.password)
+                if pass_cell.row == user_cell.row:
+                    green_text()
+                    print('LOGIN SUCCESSFUL')
+                    reset_color()
+                    typing_animation(f'Welcome {self.username}.', 0.1)
+                else:
+                    red_text()
+                    print('LOGIN FAILED: Please check username and password.')
+                    reset_color()
+                    login()
+            else:
+                red_text()
+                print('INCORECT PASSWORD')
+                reset_color()
+                login()
+        else: 
+            red_text()
+            print('USER NOT RECOGNISED')
+            reset_color()
+            login()
+
+
+def login():
+    """
+    Function for login
+    """
+    green_text()
+    typing_animation('Please enter your colleague login:\n', 0.1)
+    username = input('USERNAME:\n')
+    password = maskpass.askpass(prompt='PASSWORD:\n', mask="*")
+    reset_color()
+    login_info = Employee(username, password)
+    Employee.validate_login(login_info)
 
 
 def display_pizzas():
@@ -64,7 +166,7 @@ def display_pizzas():
     for i, pizza in enumerate(menu_list[1:]):
         pizza_str = ', '.join(pizza)
         time.sleep(0.5)
-        typing_animation(f'{i + 1}: {pizza_str}\n', 0.1)
+        print(f'{i + 1}: {pizza_str}')
     time.sleep(0.5)    
     typing_animation('\n', 0.1)
     time.sleep(0.5)
@@ -132,10 +234,11 @@ def input_sales():
     time.sleep(0.5)
     print('\nThank you. Updating production plan for next week...\n')
     calculate_production_plan()
-    print('Production plan updated succesfully.\n')
+    typing_animation('Production plan updated succesfully.\n', 0.1)
     time.sleep(0.5)
     green_text()
-    input("Press Enter to continue...\n")
+    typing_animation("Press Enter to continue...", 0.1)
+    input('\n')
     reset_color()
     option_select()
 
@@ -173,7 +276,7 @@ def input_waste():
                 reset_color()
     time.sleep(0.5)
     green_text()
-    typing_animation("Press Enter to continue...\n", 0.1)
+    typing_animation("Press Enter to continue...", 0.1)
     input('\n')
     reset_color()
     option_select()
@@ -222,7 +325,7 @@ def display_producion_plan():
             reset_color()
     time.sleep(0.5)
     green_text()
-    typing_animation("Press Enter to continue...\n", 0.1)
+    typing_animation("Press Enter to continue...", 0.1)
     input('\n')
     reset_color()
     option_select()
@@ -257,6 +360,7 @@ class Pizza:
     def desciption(self):
         """
         Return the pizza recipie to be printed.
+
         """
         return f"\n{self.size} {self.kind} recipie:\n{self.topping}\n"
     
@@ -306,7 +410,8 @@ def select_pizza_recipie_size():
 def select_pizza_recipie():     
     try:
         green_text()
-        pizza_chosen = int(input('\nPlease select a pizza by number:\n'))
+        typing_animation('\nPlease select a pizza by number:', 0.1)
+        pizza_chosen = int(input('\n'))
         reset_color()
         if pizza_chosen <= 13:
             build_pizza_recipie(pizza_chosen)
@@ -349,7 +454,7 @@ def build_pizza_recipie(pizza_num):
     print(pizza_recipie.desciption())
     time.sleep(0.5)
     green_text()
-    typing_animation("Press Enter to continue...\n", 0.1)
+    typing_animation("Press Enter to continue...", 0.1)
     input('\n')
     reset_color()
     option_select()
@@ -461,42 +566,12 @@ def option_select():
         reset_color()  
 
 
-def typing_animation(text, timing):
-    """
-    Function creates a short animation to represent text typed in real-time.
-    """
-    for char in text:
-        time.sleep(timing)
-        sys.stdout.write(char)
-        sys.stdout.flush()
-
-
-def intro():
-    """
-    Function displays title and intro messages
-    """
-    time.sleep(1)
-    typing_animation('\n***\n', 0.5)
-    time.sleep(1)
-    title = pyfiglet.figlet_format("Pazuzu Pizza") 
-    print(title)
-    time.sleep(2)
-    typing_animation('Welcome to the Pazuzu Pizza App\n', 0.1)
-    time.sleep(1)
-    green_text()
-    typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
-    reset_color()
-    time.sleep(1)
-    typing_animation('***\n', 0.5)
-    time.sleep(1)
-
-
 def start_program():
     """
     Activate Functions
     """
     intro()
+    login()
     weekly_delivery()
     option_select()
 
