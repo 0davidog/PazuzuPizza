@@ -105,9 +105,13 @@ Once succesful the worksheet 'pizza_sales' will be updated in the column corespo
 
 ![worksheet-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/48231ff7-ab1f-46e8-944a-a1777fc3e222)
 
+Side by side video demonstration [here](https://www.youtube.com/watch?v=KGoXKuTMRIo).
+
 The 'pizza_production' worksheet will also be updated at the end of this function by calling the calculated_production_plan function. This takes todays sales, entered by the user and adds 10% to the number then rounded to an integer.
 
 ![worksheet-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/105f7d88-7541-4ab5-918a-f32ff9304cf4)
+
+Side by side video demonstration [here](https://www.youtube.com/watch?v=P96URDFS7Tc).
 
 ### Todays Date
 
@@ -153,9 +157,12 @@ Selecting option 3 will ask the user to input the disposal numbers for each pizz
 
 ![worksheet-screen-03](https://github.com/0davidog/PazuzuPizza/assets/135815736/ecaed384-d947-41e8-86d0-2481cce98e1b)
 
+Side by side video demonstration [here](https://www.youtube.com/watch?v=LTGYZO7Mq24).
 The number of disposals entered will also be subtracted from the values in the 'pizza_stock' worksheet.
 
 ![worksheet-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/023d5802-3936-4b08-b566-b58ef7e5008d)
+
+Side by side video demonstration [here](https://www.youtube.com/watch?v=eNeWPodrs5A).
 
 ### Delivery
 
