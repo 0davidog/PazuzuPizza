@@ -235,17 +235,21 @@ Users are asked first to select the size of pizza they wish to view the recipe f
 Choosing the size will then display a numbered list of pizzas.
 
 Small:
+
 ![deployed-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/ce822f09-b528-4885-b096-9b9b39e55c6c)
 
 Large:
+
 ![deployed-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/51569cca-de36-4d78-acad-7562c82ac69f)
 
 Users are asked to input the number of the pizza they wish to view. The numbers are between 0 and 13. Doing so displays the pizza information.
 
 Number 5 - Small Hot & Spicy:
+
 ![deployed-screen-17](https://github.com/0davidog/PazuzuPizza/assets/135815736/a2de7468-8c22-4bcf-bc49-e6b2cf711d0f)
 
 Number 11 - Large Veggi Feast:
+
 ![deployed-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/3309746e-3e24-478f-a388-a163ab82e4fc)
 
 Entering anything other than a whole number will result in a warning and the user will be asked to enter their choice again.
@@ -259,6 +263,7 @@ Entering anything other than a whole number will result in a warning and the use
 Given production time and knowledge this app could provide a number of extra and more advanced features. Here is just a few:
 
 - ### Pizza Stock
+ 
   The pizza stock list that keeps track of ingredients could be updated according the amound of pizzas made. This could be achieved by multiplying the amount of a particular topping needed for a pizza by the amount of that pizza produced. For example the amount of pepperoni used on a small pepperoni pizza is 8. If 15 small pepperoni pizzas are made that day than 120 slices of pepperoni will need to be subtracted from the stock of pepperoni. This will further simplify the stock ordering process for the company.
 
 ## Planning Documentation
@@ -334,6 +339,25 @@ PEP8 validator passed with no issues.
 ## Deployment
 
 The project was deployed on Heroku using Code Institute's mock terminal.
+|Step|Screen|
+|----|------|
+|Head over to heroku and log in.|![heroku-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/116c0385-20ae-47e3-b789-0dd7d0e3510f)|
+|Choose a name.|![heroku-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/da56730b-cb2c-4fed-ab72-3685e92aa9f0)|
+|Settings|![heroku-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/bfd5280f-1621-425a-a79e-514bbc8a4af2)|
+|config vars|![heroku-screen-06](https://github.com/0davidog/PazuzuPizza/assets/135815736/7d36657a-721f-40a0-a660-a2664697b5a1)|
+|Paste your creds.json |![heroku-screen-07](https://github.com/0davidog/PazuzuPizza/assets/135815736/a532c92e-6ee4-4260-b97b-11cf8b507de8)|
+|buildpacks|![heroku-screen-08](https://github.com/0davidog/PazuzuPizza/assets/135815736/e089db21-c477-44a0-a407-6de488dc8a07)|
+|add buildpacks|![heroku-screen-09](https://github.com/0davidog/PazuzuPizza/assets/135815736/b5df724f-1c07-4dd6-9d00-685833440be7)|
+|add python|![heroku-screen-10](https://github.com/0davidog/PazuzuPizza/assets/135815736/61dfcd4b-8630-4ca8-96df-1a8d890bed5b)|
+|add nodejs|![heroku-screen-11](https://github.com/0davidog/PazuzuPizza/assets/135815736/e20ec790-ccbc-4801-89c6-9ae335f442c7)|
+|order important|![heroku-screen-12](https://github.com/0davidog/PazuzuPizza/assets/135815736/f037c40e-61ee-43a4-8a0e-dc1381eb8c44)|
+|deploy|![heroku-screen-13](https://github.com/0davidog/PazuzuPizza/assets/135815736/8bc5cb82-939f-4984-80b0-e9cb1012aa6f)|
+|github|![heroku-screen-14](https://github.com/0davidog/PazuzuPizza/assets/135815736/a4ec67be-360e-48ec-968e-8355411cd5ff)|
+|authorize|![heroku-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/75382caa-9aba-4b0a-8e51-cce6c37d59f7)|
+|choose repo|![heroku-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/8365dac8-2caf-47a5-82df-39c05e4e01a0)|
+|choose auto / branch|![heroku-screen-17](https://github.com/0davidog/PazuzuPizza/assets/135815736/38ce6bee-6c49-4ab4-bb61-9ca1c8519ee8)|
+|connected confirmation|![heroku-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/6e810e14-641c-4021-9915-d9e9ca6219c9)|
+|view app|![heroku-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/93a1f38d-f1ab-4948-99b8-a5e7ea53cf10)|
 
 ## Credits
 
