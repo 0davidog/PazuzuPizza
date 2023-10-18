@@ -452,7 +452,7 @@ def select_pizza_recipe():
         else:
             time.sleep(0.5)
             red_text()
-            print('\nPlease select a number between 1 and 13\n')
+            print('\nPlease select a number between 0 and 13\n')
             reset_color()
             select_pizza_recipe()
     except ValueError as e:
