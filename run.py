@@ -143,6 +143,10 @@ class Employee:
 def login():
     """
     Function for login
+    Ask for user input USERNAME
+    Ask for user input PASSWORD (input hidden by maskpass)
+    send login_info as username, password to Employee class
+    validate username and password with class method.
     """
     green_text()
     typing_animation('Please enter your colleague login:\n', 0.1)
@@ -307,6 +311,10 @@ def display_producion_plan():
     """
     Function to view todays production plan.
     Pulls production plan from google sheet based on day of the week.
+    print list. e.g.
+    "Mozzarella 10
+    Pepperoni 13"
+    etc
     """
     pizza_production = SHEET.worksheet('pizza_production')
     pizza_list = pizza_production.col_values(1)
@@ -349,8 +357,13 @@ class Pizza:
     -------
     description
         Forms a description/recipie using given attributes.
-    
+            e.g. 
+            "Large Margheritta recipie:
+            1 large base
+            2 passata
+            3 mozarella"
     """
+
     def __init__(self, kind, size, topping):
         self.kind = kind
         self.size = size
@@ -368,6 +381,13 @@ class Pizza:
 def select_pizza_recipie_size():
     """
     Function to select a pizza recipie to view.
+    Fetch pizza_recipie worksheet
+    Create list of column values from worsheet column 1
+    Ask for user input of 's' or 'l'.
+    Warn and re-ask if invalid or upper case.
+    Print numbered list of column values
+        first 7 if 's' selected
+        next 7 if 'l' selected
     """
     pizza_recipie = SHEET.worksheet('pizza_recipie')
     pizza_list = pizza_recipie.col_values(1)
@@ -407,7 +427,13 @@ def select_pizza_recipie_size():
         reset_color()
     select_pizza_recipie()    
 
-def select_pizza_recipie():     
+
+def select_pizza_recipie():
+    """
+    Ask user input for int.
+    return input if within range asked.
+    Warn and restart if outside of range or invalid input.
+    """
     try:
         green_text()
         typing_animation('\nPlease select a pizza by number:', 0.1)
@@ -431,7 +457,25 @@ def select_pizza_recipie():
 
 def build_pizza_recipie(pizza_num):
     """
-    Function
+    Attribute
+    ---------
+    pizza_num = int
+        received from select_pizza_recipie
+
+    Fetch all pizza recipies from worksheet as list of dictionaries.
+    Create new, blank list for pizza_toppings
+    For every key in pizza_dictionary
+        ignore if value is 0 
+        ignore if Key is 'Pizza' or 'Size'
+        add remaining value and key  pairs to pizza topping list
+            e.g. "2 passata", "2 mozzarella".
+    Join pizza_toppings list into a string var, 'toppings_str'.
+    create var 'pizza_recipie' and send as attributes to Pizza class.
+        (Pizza, Size, Toppings)
+        e.g. "Mozarella", "large", "1 large base, 2 passata, 3 mozarella"
+        indexed from dictionary via pizza_num attribute
+    print desctiption() from Pizza class
+    return to options
     """
     
     pizza_recipie_list = SHEET.worksheet('pizza_recipie')
@@ -461,12 +505,28 @@ def build_pizza_recipie(pizza_num):
 
 
 def weekly_delivery():
+    """
+    Get day today from datetime
+    Check if day is Mon
+    Call delivery function if true
+    """
     day = datetime.now().strftime("%a")
     if day == "Mon":
         delivery()
 
 
 def delivery():
+    """
+    Fetch pizza_stock worksheet
+    Fetch pizza_delivery worksheet
+    Create list of values from col 1 of pizza_delivery
+    for every item in stocklist
+        fetch each delivery value
+        fetch each stock value
+        check if current stock value is greater than delivery value
+            break if true
+            add delivery value to stock value if false
+    """
     pizza_stock = SHEET.worksheet('pizza_stock')
     pizza_delivery = SHEET.worksheet('pizza_delivery')
     stock_list = pizza_delivery.col_values(1)
@@ -493,6 +553,7 @@ def option_select():
     Function acts as main-menu
     Ask user to select which function to use.
     Use if statement to activate chosen function.
+    Warn and restart if invalid input
     """
     time.sleep(0.5)
     typing_animation('\nPlease select an option...\n', 0.1)
@@ -568,7 +629,7 @@ def option_select():
 
 def start_program():
     """
-    Activate Functions
+    Activate Functions in relevant order.
     """
     intro()
     login()
