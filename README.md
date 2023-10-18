@@ -227,12 +227,39 @@ This data is retrieved from the pizza_production worksheet with the column refer
 
 ### View Pizza Recipe
 
-Selecting option 5 displays
+Selecting option 5 displays a chosen pizza recipe for the user. Staff members can use this function to remind themselves what the standard is when creating pizzas, thus helping to create consistency in the pizzas produced by different colleagues.
+Users are asked first to select the size of pizza they wish to view the recipe for. This is simply to reduce the size of the list and make it easy for the user to see the options within the limited view space. To choose the user must input either 's' or 'l' in lower case letters.
+
+![deployed-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/e600ecb8-515f-4a3e-9aaf-785243900ae7)
+
+Choosing the size will then display a numbered list of pizzas.
+
+Small:
+![deployed-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/ce822f09-b528-4885-b096-9b9b39e55c6c)
+
+Large:
+![deployed-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/51569cca-de36-4d78-acad-7562c82ac69f)
+
+Users are asked to input the number of the pizza they wish to view. The numbers are between 0 and 13. Doing so displays the pizza information.
+
+Number 5 - Small Hot & Spicy:
+![deployed-screen-17](https://github.com/0davidog/PazuzuPizza/assets/135815736/a2de7468-8c22-4bcf-bc49-e6b2cf711d0f)
+
+Number 11 - Large Veggi Feast:
+![deployed-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/3309746e-3e24-478f-a388-a163ab82e4fc)
+
+Entering anything other than a whole number will result in a warning and the user will be asked to enter their choice again.
+
+![deployed-screen-20](https://github.com/0davidog/PazuzuPizza/assets/135815736/1e3427ee-bfc7-4f97-94bc-d681262ea74e)
+
+![deployed-screen-21](https://github.com/0davidog/PazuzuPizza/assets/135815736/f7203c54-b08a-443d-a574-b5897485a873)
 
 ## Future Features
 
-- pizza stock
-- employee login
+Given production time and knowledge this app could provide a number of extra and more advanced features. Here is just a few:
+
+- ### Pizza Stock
+  The pizza stock list that keeps track of ingredients could be updated according the amound of pizzas made. This could be achieved by multiplying the amount of a particular topping needed for a pizza by the amount of that pizza produced. For example the amount of pepperoni used on a small pepperoni pizza is 8. If 15 small pepperoni pizzas are made that day than 120 slices of pepperoni will need to be subtracted from the stock of pepperoni. This will further simplify the stock ordering process for the company.
 
 ## Planning Documentation
 
@@ -241,36 +268,60 @@ Flow chart for 'input sales' function:
 
 ## Data Model
 
-- pizza class?
+![class-table](https://github.com/0davidog/PazuzuPizza/assets/135815736/ed9c45eb-be93-4300-a97a-7a284a1b4afd)
 
 ## Libraries Used
 
 - gspread
+  - gspread was used to access and update google sheets.
 - datetime [more detail](#Todays-Date)
+- Google Drive
+  - google drive credentials were needed to access google sheets.
+- colorama
+  - colorama Fore was used to change the text colour in various placed to add emphasis to inputs and warnings making the experience better for the customer.
+  - colorama Style was used to reset any colour effects when needed.
+- pyfiglet
+  - pyfiglet provided the title font used to make the app introduction more eye catching.
+- sys
+  - sys was imported to set up the sys.exit function for the the user wishes to quit.
+- maskpass
+  - maskpass was installed to hide the user's password input.
+- warnings [more detail](#Bugs)
 
 ## Testing
 
 (I have manually tested by doing the following...)
-- pep8
+- [PEP8/CI Python Linter](#Validator-Testing)
 - input tests
 - local and heroku
 
 ### Bugs
 
-- warning once per round
+Bug: A warning kept being printed the first time a google sheet was updated in a session. From some investigation it appeared the warning was for some changes being implimented in a future version of gspread. 
 
 ```
 UserWarning: [Deprecated][in version 6.0.0]: method signature will change to: 'Worksheet.update(value = [[]], range_name=)' arguments 'range_name' and 'values' will swap, values will be mandatory of type: 'list(list(...))'
   warnings.warn(
 ```
 
+Fix: The problem was solved by importing the warnings module and using it to ignore UserWarnings.
+
+```
+warnings.filterwarnings("ignore", category=UserWarning)
 - (error occured because I had Sun in lowercase)
+```
+
+Bug: This error kept occuring when trying to update any of the day-based google sheets: 
+
 ```
 Error: An unexpected error occurred - {'code': 400, 'message': "Unable to parse range: 'pizza_production'!NONE2", 'status': 'INVALID_ARGUMENT'}
 ```
-- get stuck in select pizza recipe
+
+Fix: It happened to be a Sunday when this error appeared and I found "Sun" in the convert_day function had been mistakenly written in lower case.
 
 ### Remaining Bugs
+
+No known bugs remaining.
 
 ### Validator Testing
 
@@ -287,6 +338,7 @@ The project was deployed on Heroku using Code Institute's mock terminal.
 ## Credits
 
 For the code used to authorize and access Google Drive and Google sheets I followed the Code Institute Love-Sandwiches walkthrough project. This was due to the code dealing with complicated concepts that needed to be written accurately for the whole project to work.
+
 Here's the code used:
 ```
 SCOPE = [
@@ -300,37 +352,3 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 ```
-
-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
-
-Welcome,
-
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
-
-## Reminders
-
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
