@@ -127,7 +127,7 @@ class Employee:
                     login()
             else:
                 red_text()
-                print('INCORECT PASSWORD')
+                print('INCORRECT PASSWORD')
                 reset_color()
                 login()
         else:
