@@ -1,22 +1,18 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
-
-# Module imports
-import sys
-import time
-import maskpass
-import gspread
-import warnings
-warnings.filterwarnings("ignore", category=UserWarning)
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 import colorama
 from colorama import Fore
 from colorama import Style
 import pyfiglet
+import sys
+import time
+import maskpass
+import gspread
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
 
-# Code to access gspread and google drive from love-sandwiches walkthough project
+# Code to access gspread and google drive
+# from love-sandwiches walkthough project
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -30,6 +26,7 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 
 # End of Love-Sandwiches walkthrough code
+
 
 def green_text():
     """
@@ -72,7 +69,7 @@ def intro():
     time.sleep(1)
     typing_animation('\n***\n', 0.5)
     time.sleep(1)
-    title = pyfiglet.figlet_format("Pazuzu Pizza") 
+    title = pyfiglet.figlet_format("Pazuzu Pizza")
     print(title)
     time.sleep(2)
     typing_animation('Welcome to the Pazuzu Pizza App\n', 0.1)
@@ -133,7 +130,7 @@ class Employee:
                 print('INCORECT PASSWORD')
                 reset_color()
                 login()
-        else: 
+        else:
             red_text()
             print('USER NOT RECOGNISED')
             reset_color()
@@ -161,7 +158,8 @@ def display_pizzas():
     """
     Display the list of pre-made pizzas available.
     List is pulled from google sheets, ignoring first cell in column.
-    For each item in the list item is numbered and printed without square brackets.
+    For each item in the list
+    item is numbered and printed without square brackets.
     option_select function is then called to return user to menu.
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
@@ -171,7 +169,7 @@ def display_pizzas():
         pizza_str = ', '.join(pizza)
         time.sleep(0.5)
         print(f'{i + 1}: {pizza_str}')
-    time.sleep(0.5)    
+    time.sleep(0.5)
     typing_animation('\n', 0.1)
     time.sleep(0.5)
     green_text()
@@ -215,18 +213,18 @@ def input_sales():
     print(
         f'\nSales figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
         )
-    
+
     pizza_sales = SHEET.worksheet('pizza_sales')
     pizza_list = pizza_sales.col_values(1)
-    
+
     for i, pizza in enumerate(pizza_list[1:]):
         while True:
             try:
                 time.sleep(0.5)
                 sold = int(input(f"Enter sales for {pizza}: \n"))
                 pizza_sales.update(
-                    f"{convert_day()}{i + 2}", 
-                    f"{sold}", 
+                    f"{convert_day()}{i + 2}",
+                    f"{sold}",
                     value_input_option='USER_ENTERED'
                     )
                 break
@@ -246,6 +244,7 @@ def input_sales():
     reset_color()
     option_select()
 
+
 def input_waste():
     """
     Function to record waste.
@@ -253,7 +252,9 @@ def input_waste():
     Ask user to enter disposal figure for each item.
     Update spreadsheet with input.
     """
-    print(f'\nDisposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n')
+    print(
+        f'\nDisposal figures for {datetime.now().strftime("%a, %d %B %Y")}\n'
+        )
 
     pizza_waste = SHEET.worksheet('pizza_disposals')
     pizza_stock = SHEET.worksheet('pizza_stock')
@@ -265,13 +266,19 @@ def input_waste():
         while True:
             try:
                 time.sleep(0.5)
-                disposal = int(input(f"Enter disposal number for {ingredient}: "))
+                disposal = int(input(
+                    f"Enter disposal number for {ingredient}: "
+                    ))
                 pizza_waste.update(
-                    f"B{i + 2}", f"{disposal}", value_input_option='USER_ENTERED'
+                    f"B{i + 2}",
+                    f"{disposal}",
+                    value_input_option='USER_ENTERED'
                     )
                 current_stock = int(pizza_stock.acell(f"B{i + 2}").value)
                 pizza_stock.update(
-                    f"B{i + 2}", f"{current_stock - disposal}", value_input_option='USER_ENTERED')
+                    f"B{i + 2}",
+                    f"{current_stock - disposal}",
+                    value_input_option='USER_ENTERED')
                 break
             except ValueError as e:
                 time.sleep(0.5)
@@ -301,8 +308,8 @@ def calculate_production_plan():
         sale = int(pizza_sales.acell(f"{convert_day()}{i + 2}").value)
         target = sale * 1.1
         pizza_production.update(
-            f'{convert_day()}{i + 2}', 
-            f"{round(target)}", 
+            f'{convert_day()}{i + 2}',
+            f"{round(target)}",
             value_input_option='USER_ENTERED'
             )
 
@@ -320,10 +327,11 @@ def display_producion_plan():
     pizza_list = pizza_production.col_values(1)
     time.sleep(0.5)
     print(f'\nProduction plan for {datetime.now().strftime("%a, %d %B %Y")}\n')
-    
+
     for i, pizza in enumerate(pizza_list[1:]):
         try:
-            cell_value = pizza_production.acell(f"{convert_day()}{i + 2}").value
+            cell_value = pizza_production.acell(
+                f"{convert_day()}{i + 2}").value
             time.sleep(0.5)
             print(f'{pizza}: {cell_value}')
         except Exception as e:
@@ -341,7 +349,7 @@ def display_producion_plan():
 
 class Pizza:
     """
-    
+
     Class of pizza.
 
     Attributes
@@ -357,7 +365,7 @@ class Pizza:
     -------
     description
         Forms a description/recipie using given attributes.
-            e.g. 
+            e.g.
             "Large Margheritta recipie:
             1 large base
             2 passata
@@ -368,7 +376,6 @@ class Pizza:
         self.kind = kind
         self.size = size
         self.topping = topping
-   
 
     def desciption(self):
         """
@@ -376,7 +383,7 @@ class Pizza:
 
         """
         return f"\n{self.size} {self.kind} recipie:\n{self.topping}\n"
-    
+
 
 def select_pizza_recipie_size():
     """
@@ -419,13 +426,13 @@ def select_pizza_recipie_size():
             red_text()
             print("\nPlease enter either 's' or 'l' in lower case.\n")
             reset_color()
-            select_pizza_recipie_size()                
+            select_pizza_recipie_size()
     except ValueError as e:
         time.sleep(0.5)
         red_text()
         print(f'\nInvalid entry: {e} Please the letter s or l\n')
         reset_color()
-    select_pizza_recipie()    
+    select_pizza_recipie()
 
 
 def select_pizza_recipie():
@@ -465,7 +472,7 @@ def build_pizza_recipie(pizza_num):
     Fetch all pizza recipies from worksheet as list of dictionaries.
     Create new, blank list for pizza_toppings
     For every key in pizza_dictionary
-        ignore if value is 0 
+        ignore if value is 0
         ignore if Key is 'Pizza' or 'Size'
         add remaining value and key  pairs to pizza topping list
             e.g. "2 passata", "2 mozzarella".
@@ -477,23 +484,26 @@ def build_pizza_recipie(pizza_num):
     print desctiption() from Pizza class
     return to options
     """
-    
+
     pizza_recipie_list = SHEET.worksheet('pizza_recipie')
     pizza_dictionary = pizza_recipie_list.get_all_records()
     pizza_toppings = []
-    
+
     for key, value in pizza_dictionary[pizza_num].items():
         if value == 0:
             pass
         elif key == 'Pizza':
             pass
         elif key == 'Size':
-            pass    
+            pass
         else:
             pizza_toppings.append(f"{value} {key}")
-    
+
     toppings_str = ', \n'.join(pizza_toppings)
-    pizza_recipie = (Pizza(f'{pizza_dictionary[pizza_num]["Pizza"]}', f'{pizza_dictionary[pizza_num]["Size"]}', f'{toppings_str}'))    
+    pizza_recipie = (Pizza(
+        f'{pizza_dictionary[pizza_num]["Pizza"]}',
+        f'{pizza_dictionary[pizza_num]["Size"]}',
+        f'{toppings_str}'))
     time.sleep(0.5)
     print(pizza_recipie.desciption())
     time.sleep(0.5)
@@ -539,8 +549,11 @@ def delivery():
             reset_color()
             time.sleep(0.5)
             break
-        else:    
-            pizza_stock.update(f'B{i + 2}', f'{current_stock + delivery_value}', value_input_option='USER_ENTERED')
+        else:
+            pizza_stock.update(
+                f'B{i + 2}', f'{current_stock + delivery_value}',
+                value_input_option='USER_ENTERED'
+                )
             red_text()
             print('\nNOTICE: Weekly delivery has been received.')
             time.sleep(0.5)
@@ -600,13 +613,15 @@ def option_select():
             time.sleep(0.5)
             print('\nDisplaying Recipie...')
             typing_animation('\n***\n', 0.5)
-            select_pizza_recipie_size()    
+            select_pizza_recipie_size()
         elif user_selection == "6":
             time.sleep(0.5)
             typing_animation('\nExiting program...\n', 0.1)
             typing_animation('\n***\n', 0.5)
             time.sleep(0.5)
-            typing_animation('\nThank you for using the Pazuzu Pizza App.\n', 0.1)
+            typing_animation(
+                '\nThank you for using the Pazuzu Pizza App.\n', 0.1
+                )
             time.sleep(0.5)
             red_text()
             sys.exit('Select [Run Program] button at the top to restart.\n')
@@ -624,7 +639,7 @@ def option_select():
         time.sleep(0.5)
         red_text()
         print(f'Invalid entry: ({e}). Only the option number is required\n')
-        reset_color()  
+        reset_color()
 
 
 def start_program():
