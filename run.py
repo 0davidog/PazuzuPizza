@@ -60,16 +60,17 @@ def display_pizzas():
     """
     pizza_menu = SHEET.worksheet('pizza_menu')
     menu_list = pizza_menu.get_all_values()
-    print('\n')
+    typing_animation('\n', 0.1)
     for i, pizza in enumerate(menu_list[1:]):
         pizza_str = ', '.join(pizza)
         time.sleep(0.5)
-        print(f'{i + 1}: {pizza_str}')
+        typing_animation(f'{i + 1}: {pizza_str}\n', 0.1)
     time.sleep(0.5)    
-    print('\n')
+    typing_animation('\n', 0.1)
     time.sleep(0.5)
     green_text()
-    input("Press Enter to continue...\n")
+    typing_animation("Press Enter to continue...", 0.1)
+    input('\n')
     reset_color()
     option_select()
 
@@ -172,7 +173,8 @@ def input_waste():
                 reset_color()
     time.sleep(0.5)
     green_text()
-    input("Press Enter to continue...\n")
+    typing_animation("Press Enter to continue...\n", 0.1)
+    input('\n')
     reset_color()
     option_select()
 
@@ -220,7 +222,8 @@ def display_producion_plan():
             reset_color()
     time.sleep(0.5)
     green_text()
-    input("Press Enter to continue...\n")
+    typing_animation("Press Enter to continue...\n", 0.1)
+    input('\n')
     reset_color()
     option_select()
 
@@ -346,7 +349,8 @@ def build_pizza_recipie(pizza_num):
     print(pizza_recipie.desciption())
     time.sleep(0.5)
     green_text()
-    input("\nPress Enter to continue...\n")
+    typing_animation("Press Enter to continue...\n", 0.1)
+    input('\n')
     reset_color()
     option_select()
 
@@ -386,7 +390,7 @@ def option_select():
     Use if statement to activate chosen function.
     """
     time.sleep(0.5)
-    print('\nPlease select an option...\n')
+    typing_animation('\nPlease select an option...\n', 0.1)
     time.sleep(0.5)
     print('> 1: Display Pizza Menu')
     time.sleep(0.5)
@@ -398,10 +402,11 @@ def option_select():
     time.sleep(0.5)
     print('> 5: View Pizza Recipie')
     time.sleep(0.5)
-    print('> 6: Exit\n')
+    print('> 6: Exit')
     time.sleep(0.5)
     green_text()
-    user_selection = input('Input Option Number: \n')
+    typing_animation('Input Option Number:', 0.1)
+    user_selection = input('\n')
     reset_color()
     try:
         if user_selection == "1":
@@ -432,10 +437,10 @@ def option_select():
             select_pizza_recipie_size()    
         elif user_selection == "6":
             time.sleep(0.5)
-            print('\nExiting program...')
+            typing_animation('\nExiting program...\n', 0.1)
             typing_animation('\n***\n', 0.5)
             time.sleep(0.5)
-            print('\nThank you for using the Pazuzu Pizza App.\n')
+            typing_animation('\nThank you for using the Pazuzu Pizza App.\n', 0.1)
             time.sleep(0.5)
             red_text()
             sys.exit('Select [Run Program] button at the top to restart.\n')
@@ -479,10 +484,11 @@ def intro():
     typing_animation('Welcome to the Pazuzu Pizza App\n', 0.1)
     time.sleep(1)
     green_text()
-    input("Press Enter to continue...")
+    typing_animation("Press Enter to continue...", 0.1)
+    input('\n')
     reset_color()
     time.sleep(1)
-    typing_animation('\n***\n', 0.5)
+    typing_animation('***\n', 0.5)
     time.sleep(1)
 
 
