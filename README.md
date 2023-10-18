@@ -220,9 +220,14 @@ def delivery():
 
 ### View Production Plan
 
-Selecting option 4 displays for the user today's production plan
+Selecting option 4 displays for the user today's production plan. This tells the staff member how many pizzas to make for today based on last weeks sales with an aim to make and sell 10% more than last week.
+This data is retrieved from the pizza_production worksheet with the column reference chosen through the [convert_day](#Today's-Date) function.
+
+![Screenshot 2023-10-18 at 22-06-26 Python Terminal by Code Institute](https://github.com/0davidog/PazuzuPizza/assets/135815736/bc93d34c-b1d6-46d6-893d-9f8081d82293)
 
 ### View Pizza Recipe
+
+Selecting option 5 displays
 
 ## Future Features
 
