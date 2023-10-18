@@ -81,7 +81,11 @@ Error: An unexpected error occurred - {'code': 400, 'message': "Unable to parse 
 
 ### Validator Testing
 
-PEP8
+PEP8 validator passed with no issues.
+
+![Screenshot 2023-10-18 at 16-38-28 CI Python Linter](https://github.com/0davidog/PazuzuPizza/assets/135815736/e9b9ecbd-7438-463e-a81b-9631506e103a)
+
+[PEP8 Validator/ CI Python Linter](https://pep8ci.herokuapp.com/#)
 
 ## Deployment
 
