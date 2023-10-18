@@ -227,13 +227,29 @@ def display_producion_plan():
 
 class Pizza:
     """
+    
     Class of pizza.
-    Forms a description/recipie using given data.
+
+    Attributes
+    ----------
+    kind = str
+        The style of pizza e.g. 'Margheritta'.
+    size = str
+        This size of the pizza in either 'small' or 'large'.
+    topping = str
+        List of ingredients used in the style of pizza.
+
+    Methods
+    -------
+    description
+        Forms a description/recipie using given attributes.
+    
     """
     def __init__(self, kind, size, topping):
         self.kind = kind
         self.size = size
         self.topping = topping
+   
 
     def desciption(self):
         """
@@ -391,33 +407,33 @@ def option_select():
         if user_selection == "1":
             time.sleep(0.5)
             print('\nDisplaying Pizza Menu...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             display_pizzas()
         elif user_selection == "2":
             time.sleep(0.5)
             print('\nRecording sales...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             input_sales()
             option_select()
         elif user_selection == "3":
             time.sleep(0.5)
             print('\nRecording waste...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             input_waste()
         elif user_selection == "4":
             time.sleep(0.5)
             print('\nDisplaying Production Plan...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             display_producion_plan()
         elif user_selection == "5":
             time.sleep(0.5)
             print('\nDisplaying Recipie...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             select_pizza_recipie_size()    
         elif user_selection == "6":
             time.sleep(0.5)
             print('\nExiting program...')
-            loading_animation()
+            typing_animation('\n***\n', 0.5)
             time.sleep(0.5)
             print('\nThank you for using the Pazuzu Pizza App.\n')
             time.sleep(0.5)
@@ -440,10 +456,12 @@ def option_select():
         reset_color()  
 
 
-def loading_animation():
-    waiting = '\n***\n'
-    for char in waiting:
-        time.sleep(0.5)
+def typing_animation(text, timing):
+    """
+    Function creates a short animation to represent text typed in real-time.
+    """
+    for char in text:
+        time.sleep(timing)
         sys.stdout.write(char)
         sys.stdout.flush()
 
@@ -453,18 +471,18 @@ def intro():
     Function displays title and intro messages
     """
     time.sleep(1)
-    loading_animation()
+    typing_animation('\n***\n', 0.5)
     time.sleep(1)
     title = pyfiglet.figlet_format("Pazuzu Pizza") 
     print(title)
     time.sleep(2)
-    print('Welcome to the Pazuzu Pizza App\n')
+    typing_animation('Welcome to the Pazuzu Pizza App\n', 0.1)
     time.sleep(1)
     green_text()
     input("Press Enter to continue...")
     reset_color()
     time.sleep(1)
-    loading_animation()
+    typing_animation('\n***\n', 0.5)
     time.sleep(1)
 
 
