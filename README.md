@@ -17,9 +17,12 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## How to Use
 
-![Screenshot 2023-10-15 at 15-02-38 Python Terminal by Code Institute](https://github.com/0davidog/PazuzuPizza/assets/135815736/225d791a-3508-4dd7-b3b4-8878fee82025)
+![deployed-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/48196768-f1b3-4c84-8430-8d807d664021)
 
-- The user is first asked to select option. This is done by inputting the option number.
+- The user is first asked to login.
+    This is done by choosing one of these pre-made user accounts:
+    ![employee-screen](https://github.com/0davidog/PazuzuPizza/assets/135815736/d9a05930-565f-4741-b385-d8340e20d0da)
+- The user is then asked to select option. This is done by inputting the option number.
 - Selecting 1. 'Display Menu' brings up a list of pizza styles the company makes.
 - Selecting 2. 'Input Sales' asks the user to input a number for each pizza.
 - Selecting 3. 'Input Disosals' asks user to input disposal number for each pizza ingredient.
@@ -28,9 +31,41 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
   
 ## Features
 
-- ### Display Menu
-  ![Screenshot 2023-10-15 at 15-03-01 Python Terminal by Code Institute](https://github.com/0davidog/PazuzuPizza/assets/135815736/24514156-f485-4514-81cc-130ac251ad37)
+### Login
 
+After the introduction the user is asked to Log in to the app. Employees of Pazuzu Pizza are given log-in information by their management to prevent non-employees accessing and altering the information. This is stored in the employee database which is a worksheet named 'employees' in the Pazuzu_Pizza Google spreadsheet.
+
+![worksheet-screen-08](https://github.com/0davidog/PazuzuPizza/assets/135815736/9ab88ba2-68b4-4695-99a0-5d4a04affb72)
+
+First the user enters a username.
+
+![deployed-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/ae3c8234-653a-4b4f-bec5-63f3e04e243e)
+
+Followed by the password. 
+The characters on the password input are hidden via the python module ['maskpass'](#maskpass).
+
+![deployed-screen-03](https://github.com/0davidog/PazuzuPizza/assets/135815736/e1066b2d-3872-4a83-9aba-63a309a20a3e)
+
+The app then retrieves the username and password and checks them against the 'employees' worksheet.
+The username is checked first. If this doesn't exist on the worksheet a warning is given and the user is asked to enter the information again.
+
+![deployed-screen-05](https://github.com/0davidog/PazuzuPizza/assets/135815736/62c52d83-c165-4118-93e9-43db72a46533)
+
+Then, if the username is recognised but the password is not a different warning is issued and the user is asked to enter the information again.
+
+![deployed-screen-06](https://github.com/0davidog/PazuzuPizza/assets/135815736/7dbc44b8-09f7-471b-926d-ac249db367a8)
+
+This applies too if the inputs are left blank.
+
+![deployed-screen-07](https://github.com/0davidog/PazuzuPizza/assets/135815736/f5f63ac4-eaaa-41b9-a7a8-59019dcbc2f0)
+
+Once the username and password are entered correctly the user is taken to the main menu part of the app.
+
+![deployed-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/c484add1-e190-41b5-a965-b82885b55edf)
+
+### Option Selection
+
+- ### Display Menu
 - ### Input Sales
 - ### Input Disposals
 - ### View Production Plan
