@@ -364,9 +364,9 @@ class Pizza:
     Methods
     -------
     description
-        Forms a description/recipie using given attributes.
+        Forms a description/recipe using given attributes.
             e.g.
-            "Large Margheritta recipie:
+            "Large Margheritta recipe:
             1 large base
             2 passata
             3 mozarella"
@@ -379,16 +379,16 @@ class Pizza:
 
     def desciption(self):
         """
-        Return the pizza recipie to be printed.
+        Return the pizza recipe to be printed.
 
         """
-        return f"\n{self.size} {self.kind} recipie:\n{self.topping}\n"
+        return f"\n{self.size} {self.kind} recipe:\n{self.topping}\n"
 
 
-def select_pizza_recipie_size():
+def select_pizza_recipe_size():
     """
-    Function to select a pizza recipie to view.
-    Fetch pizza_recipie worksheet
+    Function to select a pizza recipe to view.
+    Fetch pizza_recipe worksheet
     Create list of column values from worsheet column 1
     Ask for user input of 's' or 'l'.
     Warn and re-ask if invalid or upper case.
@@ -396,8 +396,8 @@ def select_pizza_recipie_size():
         first 7 if 's' selected
         next 7 if 'l' selected
     """
-    pizza_recipie = SHEET.worksheet('pizza_recipie')
-    pizza_list = pizza_recipie.col_values(1)
+    pizza_recipe = SHEET.worksheet('pizza_recipe')
+    pizza_list = pizza_recipe.col_values(1)
     time.sleep(0.5)
     print('\nPlease select a size:\n')
     time.sleep(0.5)
@@ -426,16 +426,16 @@ def select_pizza_recipie_size():
             red_text()
             print("\nPlease enter either 's' or 'l' in lower case.\n")
             reset_color()
-            select_pizza_recipie_size()
+            select_pizza_recipe_size()
     except ValueError as e:
         time.sleep(0.5)
         red_text()
         print(f'\nInvalid entry: {e} Please the letter s or l\n')
         reset_color()
-    select_pizza_recipie()
+    select_pizza_recipe()
 
 
-def select_pizza_recipie():
+def select_pizza_recipe():
     """
     Ask user input for int.
     return input if within range asked.
@@ -447,14 +447,14 @@ def select_pizza_recipie():
         pizza_chosen = int(input('\n'))
         reset_color()
         if pizza_chosen <= 13:
-            build_pizza_recipie(pizza_chosen)
+            build_pizza_recipe(pizza_chosen)
             return pizza_chosen
         else:
             time.sleep(0.5)
             red_text()
             print('\nPlease select a number between 1 and 13\n')
             reset_color()
-            select_pizza_recipie()
+            select_pizza_recipe()
     except ValueError as e:
         time.sleep(0.5)
         red_text()
@@ -462,12 +462,12 @@ def select_pizza_recipie():
         reset_color()
 
 
-def build_pizza_recipie(pizza_num):
+def build_pizza_recipe(pizza_num):
     """
     Attribute
     ---------
     pizza_num = int
-        received from select_pizza_recipie
+        received from select_pizza_recipe
 
     Fetch all pizza recipies from worksheet as list of dictionaries.
     Create new, blank list for pizza_toppings
@@ -477,7 +477,7 @@ def build_pizza_recipie(pizza_num):
         add remaining value and key  pairs to pizza topping list
             e.g. "2 passata", "2 mozzarella".
     Join pizza_toppings list into a string var, 'toppings_str'.
-    create var 'pizza_recipie' and send as attributes to Pizza class.
+    create var 'pizza_recipe' and send as attributes to Pizza class.
         (Pizza, Size, Toppings)
         e.g. "Mozarella", "large", "1 large base, 2 passata, 3 mozarella"
         indexed from dictionary via pizza_num attribute
@@ -485,8 +485,8 @@ def build_pizza_recipie(pizza_num):
     return to options
     """
 
-    pizza_recipie_list = SHEET.worksheet('pizza_recipie')
-    pizza_dictionary = pizza_recipie_list.get_all_records()
+    pizza_recipe_list = SHEET.worksheet('pizza_recipe')
+    pizza_dictionary = pizza_recipe_list.get_all_records()
     pizza_toppings = []
 
     for key, value in pizza_dictionary[pizza_num].items():
@@ -500,12 +500,12 @@ def build_pizza_recipie(pizza_num):
             pizza_toppings.append(f"{value} {key}")
 
     toppings_str = ', \n'.join(pizza_toppings)
-    pizza_recipie = (Pizza(
+    pizza_recipe = (Pizza(
         f'{pizza_dictionary[pizza_num]["Pizza"]}',
         f'{pizza_dictionary[pizza_num]["Size"]}',
         f'{toppings_str}'))
     time.sleep(0.5)
-    print(pizza_recipie.desciption())
+    print(pizza_recipe.desciption())
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
@@ -579,7 +579,7 @@ def option_select():
     time.sleep(0.5)
     print('> 4: View Production Plan')
     time.sleep(0.5)
-    print('> 5: View Pizza Recipie')
+    print('> 5: View Pizza Recipe')
     time.sleep(0.5)
     print('> 6: Exit')
     time.sleep(0.5)
@@ -611,9 +611,9 @@ def option_select():
             display_producion_plan()
         elif user_selection == "5":
             time.sleep(0.5)
-            print('\nDisplaying Recipie...')
+            print('\nDisplaying Recipe...')
             typing_animation('\n***\n', 0.5)
-            select_pizza_recipie_size()
+            select_pizza_recipe_size()
         elif user_selection == "6":
             time.sleep(0.5)
             typing_animation('\nExiting program...\n', 0.1)
