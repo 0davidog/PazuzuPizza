@@ -7,6 +7,40 @@ Author: David C. O'Gara
 Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with sales and stock of their buisness. 
 The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plan and offering access to other useful information such as pizza recipies and menu lists.
 
+- [Pazuzu Pizza](#pazuzu-pizza)
+  * [Live Site](#live-site)
+  * [Repository](#repository)
+  * [Google Sheet](#google-sheet)
+  * [User](#user)
+  * [How to Use](#how-to-use)
+  * [Features](#features)
+    + [Login](#login)
+    + [Option Selection](#option-selection)
+    + [Display Menu](#display-menu)
+    + [Input Sales](#input-sales)
+    + [Todays Date](#todays-date)
+    + [Input Disposals](#input-disposals)
+    + [Delivery](#delivery)
+    + [View Production Plan](#view-production-plan)
+    + [View Pizza Recipe](#view-pizza-recipe)
+  * [Future Features](#future-features)
+    + [Pizza Stock](#pizza-stock)
+  * [Planning Documentation](#planning-documentation)
+  * [Data Model](#data-model)
+  * [Libraries Used](#libraries-used)
+  * [Testing](#testing)
+    + [Manual test](#manual-test)
+    + [Bugs](#bugs)
+    + [Remaining Bugs](#remaining-bugs)
+    + [Validator Testing](#validator-testing)
+  * [Deployment](#deployment)
+    + [Google Sheets API](#google-sheets-api)
+    + [Gitpod](#gitpod)
+    + [Heroku](#heroku)
+  * [Credits](#credits)
+    + [Mentor](#mentor)
+    + [Author](#author)
+
 ## Live Site
 
 [Pazuzu Pizza via Heroku](https://pazuzuz-pizza-b36de06442d6.herokuapp.com/)
@@ -18,6 +52,7 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 ## Google Sheet
 
 [Pazuzu Pizza Google Sheet](https://docs.google.com/spreadsheets/d/1tuZHZiGloPHvjHOcF4cx2RZ7-4RQdUAO_I-zNRNlWxc/edit?usp=sharing)
+
 
 ## User
 
@@ -451,6 +486,8 @@ The project was deployed on Heroku using Code Institute's mock terminal.
 
 ## Credits
 
+### Content
+
 For the code used to authorize and access Google Drive and Google sheets I followed the Code Institute Love-Sandwiches walkthrough project. This was due to the code dealing with complicated concepts that needed to be written accurately for the whole project to work.
 
 Here's the code used:
@@ -466,6 +503,10 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 ```
+
+#### Table of Contents
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ### Mentor
 
