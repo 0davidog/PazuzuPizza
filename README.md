@@ -15,6 +15,10 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 [Pazuzu Pizza Repository on Github](https://github.com/0davidog/PazuzuPizza)
 
+## Google Sheet
+
+[Pazuzu Pizza Google Sheet](https://docs.google.com/spreadsheets/d/1tuZHZiGloPHvjHOcF4cx2RZ7-4RQdUAO_I-zNRNlWxc/edit?usp=sharing)
+
 ## User
 
 Pazuzu Pizza, is a small company that rents a counter in the corner of a larger supermarket. They pre-make and wrap a selection of pizzas in various styles and in one of two sizes (small or large). Customers can then perhase these pizzas cold to cook at home or have them cooked instore to take-away hot. The owner wants an application to simplify and in some ways automate some of the process of keeping track of sales and stock. The users of this app will be the staff members working on the counter on a given day.
@@ -297,8 +301,16 @@ Flow chart for 'input sales' function:
 
 (I have manually tested by doing the following...)
 - [PEP8/CI Python Linter](#Validator-Testing)
-- input tests
 - local and heroku
+- ### Manual test
+
+|Function|Actions|No errors|
+|--------|-------|---------|
+|1.|1.<br>2.| [x] |
+|2.|1.| [x] |
+|3.|1.| [x] |
+|4.|1.| [x] |
+|5.|1.| [x] |
 
 ### Bugs
 
@@ -338,7 +350,85 @@ PEP8 validator passed with no issues.
 
 ## Deployment
 
+### Google Sheets API
+
+As mentioned throughout Pazuzu Pizza is connected to Google Sheets through an Application Programming Interface.
+
+The Spreadsheet name is Pazuzu_Pizza. [link](https://docs.google.com/spreadsheets/d/1tuZHZiGloPHvjHOcF4cx2RZ7-4RQdUAO_I-zNRNlWxc/edit?usp=sharing)
+
+Sheet names:
+- pizza_sales
+- pizza_production
+- pizza_disposals
+- pizza_stock
+- pizza_delivery
+- pizza_recipe
+- pizza_menu
+- employees
+
+Instructions for setting this up:
+
+(create google account use personal account as more secure
+file - make a copy)
+
+|Step|Screen|
+|----|------|
+|Head over to Google Cloud platform and log-in.|![api-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/cd0937c7-1e46-4f15-9862-5eca6c2bf0df)|
+|Click 'Select a project'. Then 'New Project'.|![api-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/9b6e926e-40f6-471d-af2c-8f2b715be1d8)|
+
+
+
+
+```
+SCOPE = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive.file",
+    "https://www.googleapis.com/auth/drive"
+    ]
+
+CREDS = Credentials.from_service_account_file('creds.json')
+SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
+```
+copy client email
+spreadsheet share
+gitignore.
+
+### Gitpod
+
+- In order for the app to work correctly with all the installed modules the mock terminal needs to know which modules to install ahead of time.
+- To do this we need the file 'requirements.txt'.
+- This file will contain a list of modules and their version.
+- In my case this is the full list:
+```
+cachetools==5.3.1
+certifi==2023.7.22
+charset-normalizer==3.3.0
+colorama==0.4.6
+google-auth==2.23.2
+google-auth-oauthlib==1.1.0
+gspread==5.11.3
+idna==3.4
+maskpass==0.3.7
+oauthlib==3.2.2
+pyasn1==0.5.0
+pyasn1-modules==0.3.0
+pyfiglet==1.0.2
+requests==2.31.0
+requests-oauthlib==1.3.1
+rsa==4.9
+urllib3==2.0.6
+```
+Python can populate this list for you automatically with this command:
+```
+pip3 freeze > requirements.txt
+```
+
+### Heroku
+
 The project was deployed on Heroku using Code Institute's mock terminal.
+    
 |Step|Screen|
 |----|------|
 |Head over to heroku and log in.|![heroku-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/116c0385-20ae-47e3-b789-0dd7d0e3510f)|
@@ -376,3 +466,11 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
 ```
+
+### Mentor
+
+Malia Havlicek
+
+### Author
+
+David C. O'Gara 2023
