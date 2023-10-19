@@ -221,7 +221,9 @@ def input_sales():
         while True:
             try:
                 time.sleep(0.5)
-                sold = int(input(f"Enter sales for {pizza}: \n").strip().lower())
+                sold = int(input(
+                    f"Enter sales for {pizza}: \n"
+                    ).strip().lower())
                 pizza_sales.update(
                     f"{convert_day()}{i + 2}",
                     f"{sold}",
