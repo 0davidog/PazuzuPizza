@@ -76,7 +76,7 @@ def intro():
     time.sleep(1)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     time.sleep(1)
     typing_animation('***\n', 0.5)
@@ -174,7 +174,7 @@ def display_pizzas():
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     option_select()
 
@@ -221,7 +221,7 @@ def input_sales():
         while True:
             try:
                 time.sleep(0.5)
-                sold = int(input(f"Enter sales for {pizza}: \n"))
+                sold = int(input(f"Enter sales for {pizza}: \n").strip().lower())
                 pizza_sales.update(
                     f"{convert_day()}{i + 2}",
                     f"{sold}",
@@ -240,7 +240,7 @@ def input_sales():
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     option_select()
 
@@ -268,7 +268,7 @@ def input_waste():
                 time.sleep(0.5)
                 disposal = int(input(
                     f"Enter disposal number for {ingredient}: "
-                    ))
+                    ).strip().lower())
                 pizza_waste.update(
                     f"B{i + 2}",
                     f"{disposal}",
@@ -288,7 +288,7 @@ def input_waste():
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     option_select()
 
@@ -342,7 +342,7 @@ def display_producion_plan():
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     option_select()
 
@@ -406,7 +406,7 @@ def select_pizza_recipe_size():
     print('> Large (l)\n')
     try:
         green_text()
-        size_chosen = input('Choose s / l:\n')
+        size_chosen = input('Choose s / l:\n').strip().lower()
         reset_color()
         if size_chosen == "s":
             time.sleep(0.5)
@@ -444,7 +444,7 @@ def select_pizza_recipe():
     try:
         green_text()
         typing_animation('\nPlease select a pizza by number:', 0.1)
-        pizza_chosen = int(input('\n'))
+        pizza_chosen = int(input('\n').strip().lower())
         reset_color()
         if pizza_chosen <= 13:
             build_pizza_recipe(pizza_chosen)
@@ -509,7 +509,7 @@ def build_pizza_recipe(pizza_num):
     time.sleep(0.5)
     green_text()
     typing_animation("Press Enter to continue...", 0.1)
-    input('\n')
+    input('\n').strip().lower()
     reset_color()
     option_select()
 
@@ -585,7 +585,7 @@ def option_select():
     time.sleep(0.5)
     green_text()
     typing_animation('Input Option Number:', 0.1)
-    user_selection = input('\n')
+    user_selection = input('\n').strip().lower()
     reset_color()
     try:
         if user_selection == "1":
