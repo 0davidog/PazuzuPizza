@@ -4,8 +4,8 @@
 
 Author: David C. O'Gara
 
-Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with sales and stock of their buisness. 
-The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plan and offering access to other useful information such as pizza recipies and menu lists.
+Pazuzu Pizza is a command line application. Built in python, that enables users an easy way to keep up to date with sales and stock of their business. 
+The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket, and offers its users the ability to input sales data and wastage while automating their production plan and offering access to other useful information such as pizza recipes and menu lists.
 
 - [Pazuzu Pizza](#pazuzu-pizza)
   * [Live Site](#live-site)
@@ -18,7 +18,7 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
     + [Option Selection](#option-selection)
     + [Display Menu](#display-menu)
     + [Input Sales](#input-sales)
-    + [Todays Date](#todays-date)
+    + [Today's Date](#today's-date)
     + [Input Disposals](#input-disposals)
     + [Delivery](#delivery)
     + [View Production Plan](#view-production-plan)
@@ -56,20 +56,20 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## User
 
-Pazuzu Pizza, is a small company that rents a counter in the corner of a larger supermarket. They pre-make and wrap a selection of pizzas in various styles and in one of two sizes (small or large). Customers can then perhase these pizzas cold to cook at home or have them cooked instore to take-away hot. The owner wants an application to simplify and in some ways automate some of the process of keeping track of sales and stock. The users of this app will be the staff members working on the counter on a given day.
+Pazuzu Pizza, is a small company that rents a counter in the corner of a larger supermarket. They pre-make and wrap a selection of pizzas in various styles and in one of two sizes (small or large). Customers can then purchase these pizzas cold to cook at home, or have them cooked in-store to take-away hot. The owner wants an application to simplify and in some ways automate some of the process of keeping track of sales and stock. The users of this app will be the staff members working on the counter on a given day.
 
 ## How to Use
 
 ![deployed-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/48196768-f1b3-4c84-8430-8d807d664021)
 
-- The user is first asked to login [more detail](#login).
+- The user is first asked to log in [more detail](#login).
     This is done by choosing one of these pre-made user accounts:
     ![employee-screen](https://github.com/0davidog/PazuzuPizza/assets/135815736/d9a05930-565f-4741-b385-d8340e20d0da)
-- The user is then asked to select option. This is done by inputting the option number. [more detail](#)
+- The user is then asked to select an option. This is done by inputting the option number. [more detail](#)
 - Selecting 1. 'Display Menu' brings up a list of pizza styles the company makes. [more detail](#)
 - Selecting 2. 'Input Sales' asks the user to input a number for each pizza. [more detail](#)
 - Selecting 3. 'Input Disosals' asks user to input disposal number for each pizza ingredient. [more detail](#)
-- Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for todays date. [more detail](#)
+- Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for today's date. [more detail](#)
 - Selecting 5. 'View Pizza Recipe' asks the user to choose a pizza by number and then displays the recipe for the chosen pizza. [more detail](#)
   
 ## Features
@@ -146,18 +146,18 @@ Once succesful the worksheet 'pizza_sales' will be updated in the column corespo
 
 Side by side video demonstration [here](https://www.youtube.com/watch?v=KGoXKuTMRIo).
 
-The 'pizza_production' worksheet will also be updated at the end of this function by calling the calculated_production_plan function. This takes todays sales, entered by the user and adds 10% to the number then rounded to an integer.
+The 'pizza_production' worksheet will also be updated at the end of this function by calling the calculated_production_plan function. This takes today's sales, entered by the user and adds 10% to the number then rounded to an integer.
 
 ![worksheet-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/105f7d88-7541-4ab5-918a-f32ff9304cf4)
 
 Side by side video demonstration [here](https://www.youtube.com/watch?v=P96URDFS7Tc).
 
-### Todays Date
+### Today's Date
 
 ```
 from datetime import datetime
 ```
-The date used in these functions is determined by the datetime python module. The module is imported and then used to display the date at the start of some functions and also used to take todays day and translate it to an uppercase letter for use in determining the cell to update.
+The date used in these functions is determined by the datetime python module. The module is imported and then used to display the date at the start of some functions and also used to take today's day and translate it to an uppercase letter for use in determining the cell to update.
 ```
 def convert_day():
     """
@@ -192,7 +192,7 @@ The formatted string literal bellow then used the letter returned from the conve
 
 ### Input Disposals
 
-Selecting option 3 will ask the user to input the disposal numbers for each pizza ingredient. This is done at the end of the shift also as there is often ingredients/toppings that reach the end of their alloted life or use by date and must be disposed of. The user is asked to input an integer of the amount of units of each ingredient. To the staff member of Pazuzu Pizza this unit will relate to different quantities depending on the item. For example 2 units may mean 2 4oz spoons of grated mozarella, 2 2oz spoons of passata sauce or just 2 slices of pepperoni. The amount entered wil be added to the 'pizza_disposal' worksheet.
+Selecting option 3 will ask the user to input the disposal numbers for each pizza ingredient. This is done at the end of the shift also, as there are often ingredients/toppings that reach the end of their allotted life or use by date and must be disposed of. The user is asked to input an integer of the amount of units of each ingredient. To the staff member of Pazuzu Pizza, this unit will relate to different quantities depending on the item. For example, 2 units may mean 2 4oz spoons of grated mozzarella, 2 2oz spoons of passata sauce or just 2 slices of pepperoni. The amount entered will be added to the 'pizza_disposal' worksheet.
 
 ![worksheet-screen-03](https://github.com/0davidog/PazuzuPizza/assets/135815736/ecaed384-d947-41e8-86d0-2481cce98e1b)
 
@@ -267,7 +267,7 @@ This data is retrieved from the pizza_production worksheet with the column refer
 ### View Pizza Recipe
 
 Selecting option 5 displays a chosen pizza recipe for the user. Staff members can use this function to remind themselves what the standard is when creating pizzas, thus helping to create consistency in the pizzas produced by different colleagues.
-Users are asked first to select the size of pizza they wish to view the recipe for. This is simply to reduce the size of the list and make it easy for the user to see the options within the limited view space. To choose the user must input either 's' or 'l' in lower case letters.
+Users are asked first to select the size of pizza they wish to view the recipe for. This is simply to reduce the size of the list and make it easy for the user to see the options within the limited view space. To choose, the user must input either 's' or 'l' in lower case letters.
 
 ![deployed-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/e600ecb8-515f-4a3e-9aaf-785243900ae7)
 
@@ -318,7 +318,7 @@ Flow chart for 'input sales' function:
 
 - gspread
   - gspread was used to access and update google sheets.
-- datetime [more detail](#Todays-Date)
+- datetime [more detail](#Today's-Date)
 - Google Drive
   - google drive credentials were needed to access google sheets.
 - colorama
@@ -347,7 +347,7 @@ Various manual test were done to check that the app works as expected. This incl
 |Display Menu|Display list of pizzas|Pizza list checked against worksheet.| [x] | [x] |
 |Input Sales|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning. | [x] | [x] |
 |Input Disposals|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning.| [x] | [x] |
-|View Production Plan|Display list of pizzas for todays date.|List matches today. | [x] | [x] |
+|View Production Plan|Display list of pizzas for today's date.|List matches today. | [x] | [x] |
 |View Pizza Recipe|1.Request input of s or l.<br>2.Request input of number between 1 and 13.|1.Blank input gives warning.<br>1.Wrong letter gives warning.<br>1.Number entered gives warning.<br>2.Number above 13 gives warning.<br>2.Blank input gives warning.| [x] | [x] |
 
 ### Bugs
