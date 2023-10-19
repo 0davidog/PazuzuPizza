@@ -334,18 +334,21 @@ Flow chart for 'input sales' function:
 
 ## Testing
 
-(I have manually tested by doing the following...)
 - [PEP8/CI Python Linter](#Validator-Testing)
-- local and heroku
+
 - ### Manual test
 
-|Function|Actions|No errors|
-|--------|-------|---------|
-|1.|1.<br>2.| [x] |
-|2.|1.| [x] |
-|3.|1.| [x] |
-|4.|1.| [x] |
-|5.|1.| [x] |
+Various manual test were done to check that the app works as expected. This includes deliberately entering the wrong inputs and checking the data given against the google sheets.
+
+|Function|Intention|Action|No Terminal Error|Works as Expected|
+|--------|---------|------|-----------------|-----------------|
+|Login|Request and validate username and password.|Blank username input gives warning.<br>Wrong user name gives warning.<br>Blank password gives warning.<br>Wrong password gives warning. | [x] | [x] |
+|Options|Request input of option number.|Blank entry gives warning.<br>String entered gives warning.<br>Float entered gives warning.| [x] | [x] |
+|Display Menu|Display list of pizzas|Pizza list checked against worksheet.| [x] | [x] |
+|Input Sales|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning. | [x] | [x] |
+|Input Disposals|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning.| [x] | [x] |
+|View Production Plan|Display list of pizzas for todays date.|List matches today. | [x] | [x] |
+|View Pizza Recipe|1.Request input of s or l.<br>2.Request input of number between 1 and 13.|1.Blank input gives warning.<br>1.Wrong letter gives warning.<br>1.Number entered gives warning.<br>2.Number above 13 gives warning.<br>2.Blank input gives warning.| [x] | [x] |
 
 ### Bugs
 
