@@ -4,8 +4,8 @@
 
 Author: David C. O'Gara
 
-Pazuzu Pizza is a command line application. built in python, that enables users an easy way to keep up to date with sales and stock of their buisness. 
-The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket and offers its users the ability to input sales data and wastages while automating their production plan and offering access to other useful information such as pizza recipies and menu lists.
+Pazuzu Pizza is a command line application. Built in python, that enables users an easy way to keep up to date with sales and stock of their business. 
+The app is created specifically for Pazuzu Pizza, a small pizza counter within a supermarket, and offers its users the ability to input sales data and wastage while automating their production plan and offering access to other useful information such as pizza recipes and menu lists.
 
 - [Pazuzu Pizza](#pazuzu-pizza)
   * [Live Site](#live-site)
@@ -18,7 +18,7 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
     + [Option Selection](#option-selection)
     + [Display Menu](#display-menu)
     + [Input Sales](#input-sales)
-    + [Todays Date](#todays-date)
+    + [Today's Date](#today's-date)
     + [Input Disposals](#input-disposals)
     + [Delivery](#delivery)
     + [View Production Plan](#view-production-plan)
@@ -56,20 +56,20 @@ The app is created specifically for Pazuzu Pizza, a small pizza counter within a
 
 ## User
 
-Pazuzu Pizza, is a small company that rents a counter in the corner of a larger supermarket. They pre-make and wrap a selection of pizzas in various styles and in one of two sizes (small or large). Customers can then perhase these pizzas cold to cook at home or have them cooked instore to take-away hot. The owner wants an application to simplify and in some ways automate some of the process of keeping track of sales and stock. The users of this app will be the staff members working on the counter on a given day.
+Pazuzu Pizza, is a small company that rents a counter in the corner of a larger supermarket. They pre-make and wrap a selection of pizzas in various styles and in one of two sizes (small or large). Customers can then purchase these pizzas cold to cook at home, or have them cooked in-store to take-away hot. The owner wants an application to simplify and in some ways automate some of the process of keeping track of sales and stock. The users of this app will be the staff members working on the counter on a given day.
 
 ## How to Use
 
 ![deployed-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/48196768-f1b3-4c84-8430-8d807d664021)
 
-- The user is first asked to login [more detail](#login).
+- The user is first asked to log in [more detail](#login).
     This is done by choosing one of these pre-made user accounts:
     ![employee-screen](https://github.com/0davidog/PazuzuPizza/assets/135815736/d9a05930-565f-4741-b385-d8340e20d0da)
-- The user is then asked to select option. This is done by inputting the option number. [more detail](#)
+- The user is then asked to select an option. This is done by inputting the option number. [more detail](#)
 - Selecting 1. 'Display Menu' brings up a list of pizza styles the company makes. [more detail](#)
 - Selecting 2. 'Input Sales' asks the user to input a number for each pizza. [more detail](#)
 - Selecting 3. 'Input Disosals' asks user to input disposal number for each pizza ingredient. [more detail](#)
-- Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for todays date. [more detail](#)
+- Selecting 4. 'View Production Plan' shows the user to amount of pizzas to be made for today's date. [more detail](#)
 - Selecting 5. 'View Pizza Recipe' asks the user to choose a pizza by number and then displays the recipe for the chosen pizza. [more detail](#)
   
 ## Features
@@ -146,18 +146,18 @@ Once succesful the worksheet 'pizza_sales' will be updated in the column corespo
 
 Side by side video demonstration [here](https://www.youtube.com/watch?v=KGoXKuTMRIo).
 
-The 'pizza_production' worksheet will also be updated at the end of this function by calling the calculated_production_plan function. This takes todays sales, entered by the user and adds 10% to the number then rounded to an integer.
+The 'pizza_production' worksheet will also be updated at the end of this function by calling the calculated_production_plan function. This takes today's sales, entered by the user and adds 10% to the number then rounded to an integer.
 
 ![worksheet-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/105f7d88-7541-4ab5-918a-f32ff9304cf4)
 
 Side by side video demonstration [here](https://www.youtube.com/watch?v=P96URDFS7Tc).
 
-### Todays Date
+### Today's Date
 
 ```
 from datetime import datetime
 ```
-The date used in these functions is determined by the datetime python module. The module is imported and then used to display the date at the start of some functions and also used to take todays day and translate it to an uppercase letter for use in determining the cell to update.
+The date used in these functions is determined by the datetime python module. The module is imported and then used to display the date at the start of some functions and also used to take today's day and translate it to an uppercase letter for use in determining the cell to update.
 ```
 def convert_day():
     """
@@ -192,7 +192,7 @@ The formatted string literal bellow then used the letter returned from the conve
 
 ### Input Disposals
 
-Selecting option 3 will ask the user to input the disposal numbers for each pizza ingredient. This is done at the end of the shift also as there is often ingredients/toppings that reach the end of their alloted life or use by date and must be disposed of. The user is asked to input an integer of the amount of units of each ingredient. To the staff member of Pazuzu Pizza this unit will relate to different quantities depending on the item. For example 2 units may mean 2 4oz spoons of grated mozarella, 2 2oz spoons of passata sauce or just 2 slices of pepperoni. The amount entered wil be added to the 'pizza_disposal' worksheet.
+Selecting option 3 will ask the user to input the disposal numbers for each pizza ingredient. This is done at the end of the shift also, as there are often ingredients/toppings that reach the end of their allotted life or use by date and must be disposed of. The user is asked to input an integer of the amount of units of each ingredient. To the staff member of Pazuzu Pizza, this unit will relate to different quantities depending on the item. For example, 2 units may mean 2 4oz spoons of grated mozzarella, 2 2oz spoons of passata sauce or just 2 slices of pepperoni. The amount entered will be added to the 'pizza_disposal' worksheet.
 
 ![worksheet-screen-03](https://github.com/0davidog/PazuzuPizza/assets/135815736/ecaed384-d947-41e8-86d0-2481cce98e1b)
 
@@ -267,7 +267,7 @@ This data is retrieved from the pizza_production worksheet with the column refer
 ### View Pizza Recipe
 
 Selecting option 5 displays a chosen pizza recipe for the user. Staff members can use this function to remind themselves what the standard is when creating pizzas, thus helping to create consistency in the pizzas produced by different colleagues.
-Users are asked first to select the size of pizza they wish to view the recipe for. This is simply to reduce the size of the list and make it easy for the user to see the options within the limited view space. To choose the user must input either 's' or 'l' in lower case letters.
+Users are asked first to select the size of pizza they wish to view the recipe for. This is simply to reduce the size of the list and make it easy for the user to see the options within the limited view space. To choose, the user must input either 's' or 'l' in lower case letters.
 
 ![deployed-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/e600ecb8-515f-4a3e-9aaf-785243900ae7)
 
@@ -318,7 +318,7 @@ Flow chart for 'input sales' function:
 
 - gspread
   - gspread was used to access and update google sheets.
-- datetime [more detail](#Todays-Date)
+- datetime [more detail](#Today's-Date)
 - Google Drive
   - google drive credentials were needed to access google sheets.
 - colorama
@@ -334,18 +334,21 @@ Flow chart for 'input sales' function:
 
 ## Testing
 
-(I have manually tested by doing the following...)
 - [PEP8/CI Python Linter](#Validator-Testing)
-- local and heroku
+
 - ### Manual test
 
-|Function|Actions|No errors|
-|--------|-------|---------|
-|1.|1.<br>2.| [x] |
-|2.|1.| [x] |
-|3.|1.| [x] |
-|4.|1.| [x] |
-|5.|1.| [x] |
+Various manual test were done to check that the app works as expected. This includes deliberately entering the wrong inputs and checking the data given against the google sheets.
+
+|Function|Intention|Action|No Terminal Error|Works as Expected|
+|--------|---------|------|-----------------|-----------------|
+|Login|Request and validate username and password.|Blank username input gives warning.<br>Wrong user name gives warning.<br>Blank password gives warning.<br>Wrong password gives warning. | [x] | [x] |
+|Options|Request input of option number.|Blank entry gives warning.<br>String entered gives warning.<br>Float entered gives warning.| [x] | [x] |
+|Display Menu|Display list of pizzas|Pizza list checked against worksheet.| [x] | [x] |
+|Input Sales|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning. | [x] | [x] |
+|Input Disposals|Request input of whole number for each item.|String input gives warning.<br>Blank input gives warning.| [x] | [x] |
+|View Production Plan|Display list of pizzas for today's date.|List matches today. | [x] | [x] |
+|View Pizza Recipe|1.Request input of s or l.<br>2.Request input of number between 1 and 13.|1.Blank input gives warning.<br>1.Wrong letter gives warning.<br>1.Number entered gives warning.<br>2.Number above 13 gives warning.<br>2.Blank input gives warning.| [x] | [x] |
 
 ### Bugs
 
@@ -406,29 +409,41 @@ Instructions for setting this up:
 (create google account use personal account as more secure
 file - make a copy)
 
+<details>
+<summary>Method of setting up API</summary>
+ 
 |Step|Screen|
 |----|------|
 |Head over to Google Cloud platform and log-in.|![api-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/cd0937c7-1e46-4f15-9862-5eca6c2bf0df)|
 |Click 'Select a project'. Then 'New Project'.|![api-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/9b6e926e-40f6-471d-af2c-8f2b715be1d8)|
+|Give your new project a name.|![api-screen-03](https://github.com/0davidog/PazuzuPizza/assets/135815736/f33eb7ed-fe7c-440c-b89f-335af915244d)|
+|Click 'create'.|![api-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/7698070c-43a1-4194-8732-6b679b326b72)|
+|Click 'Select Project'|![api-screen-05](https://github.com/0davidog/PazuzuPizza/assets/135815736/66f22aa0-887b-47b2-b4ae-451504d0b301)|
+|You'll be taken to the dashboard.|![api-screen-06](https://github.com/0davidog/PazuzuPizza/assets/135815736/650c03e9-bc62-4bae-a272-fa3d2c76f9c6)|
+|Using the side menu select 'APIs & Sservices' and then 'Library'|![api-screen-07](https://github.com/0davidog/PazuzuPizza/assets/135815736/7c14017d-7c30-46d7-b824-59e4702f03be)|
+|You'll be taken to the API library.|![api-screen-08](https://github.com/0davidog/PazuzuPizza/assets/135815736/7ef21c5e-d9c2-45fb-8db7-4681f64ec1fb)|
+|Search for 'Google Drive' and select 'Google Drive API'|![api-screen-09](https://github.com/0davidog/PazuzuPizza/assets/135815736/5a36954e-535a-480b-a498-3632039942e2)|
+|Select 'Enable'|![api-screen-10](https://github.com/0davidog/PazuzuPizza/assets/135815736/f6e214e2-02d7-4d17-8fcf-ee4d7725a450)|
+|In the next screen select 'Create Credentials'|![api-screen-11](https://github.com/0davidog/PazuzuPizza/assets/135815736/c5764f97-3e0a-4bb4-9cc2-594bf929f97a)|
+|In 'which API are you using?', Select an API should be 'Google Drive API' and the data you'll be accessing is 'application data'. Click 'next'.|![api-screen-12](https://github.com/0davidog/PazuzuPizza/assets/135815736/1a9abe4f-c0b9-4f9e-8d71-bced08cfa4f6)|
+|Choose a service account name and click 'create'|![api-screen-13](https://github.com/0davidog/PazuzuPizza/assets/135815736/59c98cb8-7d6b-4a94-bbdc-0f1ff13f844d)|
+|In 'select a role' chose 'Basic' - 'Editor'.|![api-screen-14](https://github.com/0davidog/PazuzuPizza/assets/135815736/02841397-6766-4993-93ad-2b88948ec2e0)|
+|Select 'continue'|![api-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/2fa6d779-fbc1-4cb3-840a-aa2a3efc3432)|
+|You can leave this blank and click 'done'|![api-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/4294725a-8115-4311-b434-c4b8d09b4d99)|
+|Select your service account on the next page.|![api-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/f0d233f2-8935-4dfd-9ffc-dad9b1033fba)|
+|Then select the keys tab|![api-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/a5ff3ef0-ce79-40e6-9b27-0c0a374d3586)|
+|Select 'add key'|![api-screen-20](https://github.com/0davidog/PazuzuPizza/assets/135815736/4034d595-6868-4c25-aae7-236ea54569bb)|
+|Select 'create new key'|![api-screen-21](https://github.com/0davidog/PazuzuPizza/assets/135815736/f4185f0a-cb25-4c9e-8fb9-c5e18962f93a)|
+|Select 'JSON' and click 'create'.|![api-screen-22](https://github.com/0davidog/PazuzuPizza/assets/135815736/ee8b4189-374d-4272-a208-dda6ffaa3066)|
+|The json file will be saved to your computer|![api-screen-23](https://github.com/0davidog/PazuzuPizza/assets/135815736/98f1da80-a387-4f11-9219-4deb2803adee)|
+|Back at the API library search for 'Google Sheets'|![api-screen-24](https://github.com/0davidog/PazuzuPizza/assets/135815736/1a8654d7-2eca-4071-b874-9649d8a525b7)|
+|Simply select 'enable'|![api-screen-25](https://github.com/0davidog/PazuzuPizza/assets/135815736/0a9beeda-4a82-4c00-90bf-e5c3ba6ca430)|
+|And the API will be enabled|![api-screen-26](https://github.com/0davidog/PazuzuPizza/assets/135815736/23744dbc-82f9-4982-aa82-960fbe7992c6)|
+|Drag and drop the downloaded json file into your project folder. Rename it if you like (e.g. creds.json). Then access the file and copy the client email.|![api-screen-27](https://github.com/0davidog/PazuzuPizza/assets/135815736/450a685f-7016-439c-b726-81c1fd6c0951)|
+|Then you can share you google sheet with your client email to allow access.|![api-screen-29](https://github.com/0davidog/PazuzuPizza/assets/135815736/f0d7bbb9-2a14-4d01-83fb-c1de07708aed)|
+|Add the json file to the gitignore list to prevent sensitive information being displayed on github.|![api-screen-28](https://github.com/0davidog/PazuzuPizza/assets/135815736/fe312741-72a0-479a-a583-811e78320c8d)|
 
-
-
-
-```
-SCOPE = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive.file",
-    "https://www.googleapis.com/auth/drive"
-    ]
-
-CREDS = Credentials.from_service_account_file('creds.json')
-SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('pazuzu_pizza')
-```
-copy client email
-spreadsheet share
-gitignore.
+</details>
 
 ### Gitpod
 
@@ -463,26 +478,30 @@ pip3 freeze > requirements.txt
 ### Heroku
 
 The project was deployed on Heroku using Code Institute's mock terminal.
+
+<details><summary>Details for deployment:</summary>
     
 |Step|Screen|
 |----|------|
-|Head over to heroku and log in.|![heroku-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/116c0385-20ae-47e3-b789-0dd7d0e3510f)|
-|Choose a name.|![heroku-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/da56730b-cb2c-4fed-ab72-3685e92aa9f0)|
-|Settings|![heroku-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/bfd5280f-1621-425a-a79e-514bbc8a4af2)|
-|config vars|![heroku-screen-06](https://github.com/0davidog/PazuzuPizza/assets/135815736/7d36657a-721f-40a0-a660-a2664697b5a1)|
-|Paste your creds.json |![heroku-screen-07](https://github.com/0davidog/PazuzuPizza/assets/135815736/a532c92e-6ee4-4260-b97b-11cf8b507de8)|
-|buildpacks|![heroku-screen-08](https://github.com/0davidog/PazuzuPizza/assets/135815736/e089db21-c477-44a0-a407-6de488dc8a07)|
-|add buildpacks|![heroku-screen-09](https://github.com/0davidog/PazuzuPizza/assets/135815736/b5df724f-1c07-4dd6-9d00-685833440be7)|
-|add python|![heroku-screen-10](https://github.com/0davidog/PazuzuPizza/assets/135815736/61dfcd4b-8630-4ca8-96df-1a8d890bed5b)|
-|add nodejs|![heroku-screen-11](https://github.com/0davidog/PazuzuPizza/assets/135815736/e20ec790-ccbc-4801-89c6-9ae335f442c7)|
-|order important|![heroku-screen-12](https://github.com/0davidog/PazuzuPizza/assets/135815736/f037c40e-61ee-43a4-8a0e-dc1381eb8c44)|
-|deploy|![heroku-screen-13](https://github.com/0davidog/PazuzuPizza/assets/135815736/8bc5cb82-939f-4984-80b0-e9cb1012aa6f)|
-|github|![heroku-screen-14](https://github.com/0davidog/PazuzuPizza/assets/135815736/a4ec67be-360e-48ec-968e-8355411cd5ff)|
-|authorize|![heroku-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/75382caa-9aba-4b0a-8e51-cce6c37d59f7)|
-|choose repo|![heroku-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/8365dac8-2caf-47a5-82df-39c05e4e01a0)|
-|choose auto / branch|![heroku-screen-17](https://github.com/0davidog/PazuzuPizza/assets/135815736/38ce6bee-6c49-4ab4-bb61-9ca1c8519ee8)|
-|connected confirmation|![heroku-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/6e810e14-641c-4021-9915-d9e9ca6219c9)|
-|view app|![heroku-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/93a1f38d-f1ab-4948-99b8-a5e7ea53cf10)|
+|Head over to heroku and log in. Choose 'create new app'.|![heroku-screen-01](https://github.com/0davidog/PazuzuPizza/assets/135815736/116c0385-20ae-47e3-b789-0dd7d0e3510f)|
+|Choose a name for your app and your location. Hit 'create app'.|![heroku-screen-02](https://github.com/0davidog/PazuzuPizza/assets/135815736/da56730b-cb2c-4fed-ab72-3685e92aa9f0)|
+|Select the 'Settings' tab.|![heroku-screen-04](https://github.com/0davidog/PazuzuPizza/assets/135815736/bfd5280f-1621-425a-a79e-514bbc8a4af2)|
+|In Config Vars, reveal config vars.|![heroku-screen-06](https://github.com/0davidog/PazuzuPizza/assets/135815736/7d36657a-721f-40a0-a660-a2664697b5a1)|
+|Paste your json file. Make sure the name is the same. |![heroku-screen-07](https://github.com/0davidog/PazuzuPizza/assets/135815736/a532c92e-6ee4-4260-b97b-11cf8b507de8)|
+|Down to the Buildpacks section.|![heroku-screen-08](https://github.com/0davidog/PazuzuPizza/assets/135815736/e089db21-c477-44a0-a407-6de488dc8a07)|
+|Select 'Add Buildpacks'|![heroku-screen-09](https://github.com/0davidog/PazuzuPizza/assets/135815736/b5df724f-1c07-4dd6-9d00-685833440be7)|
+|Add Python buildpack.|![heroku-screen-10](https://github.com/0davidog/PazuzuPizza/assets/135815736/61dfcd4b-8630-4ca8-96df-1a8d890bed5b)|
+|Repeat and add nodejs.|![heroku-screen-11](https://github.com/0davidog/PazuzuPizza/assets/135815736/e20ec790-ccbc-4801-89c6-9ae335f442c7)|
+|Make sure the order is the same.|![heroku-screen-12](https://github.com/0davidog/PazuzuPizza/assets/135815736/f037c40e-61ee-43a4-8a0e-dc1381eb8c44)|
+|Head over to the Deploy tab.|![heroku-screen-13](https://github.com/0davidog/PazuzuPizza/assets/135815736/8bc5cb82-939f-4984-80b0-e9cb1012aa6f)|
+|Select Github|![heroku-screen-14](https://github.com/0davidog/PazuzuPizza/assets/135815736/a4ec67be-360e-48ec-968e-8355411cd5ff)|
+|You will need to authorize this.|![heroku-screen-15](https://github.com/0davidog/PazuzuPizza/assets/135815736/75382caa-9aba-4b0a-8e51-cce6c37d59f7)|
+|Choose your repository.|![heroku-screen-16](https://github.com/0davidog/PazuzuPizza/assets/135815736/8365dac8-2caf-47a5-82df-39c05e4e01a0)|
+|Choose your branch in automatic deploys.|![heroku-screen-17](https://github.com/0davidog/PazuzuPizza/assets/135815736/38ce6bee-6c49-4ab4-bb61-9ca1c8519ee8)|
+|Confirmation|![heroku-screen-18](https://github.com/0davidog/PazuzuPizza/assets/135815736/6e810e14-641c-4021-9915-d9e9ca6219c9)|
+|You can now view your app.|![heroku-screen-19](https://github.com/0davidog/PazuzuPizza/assets/135815736/93a1f38d-f1ab-4948-99b8-a5e7ea53cf10)|
+
+</details>
 
 ## Credits
 
