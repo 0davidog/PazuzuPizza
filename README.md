@@ -1,6 +1,6 @@
 # Pazuzu Pizza
 
-![pazuzu-cover-images](https://github.com/0davidog/PazuzuPizza/assets/135815736/50a329f8-8860-48f1-af60-b152dc235c0e)
+![cover-image](https://github.com/0davidog/PazuzuPizza/assets/135815736/70556968-604b-48fc-b210-96d375a593c8)
 
 Author: David C. O'Gara
 
